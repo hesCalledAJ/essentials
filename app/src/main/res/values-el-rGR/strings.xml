@@ -389,6 +389,12 @@
     <!-- Features -->
     <string name="feat_screen_off_widget_title">Γραφικό στοιχείο απενεργοποίησης οθόνης</string>
     <string name="feat_screen_off_widget_desc">Αόρατο γραφικό στοιχείο για απενεργοποίηση της οθόνης</string>
+    <string name="screen_off_method_title">Screen Off Method</string>
+    <string name="screen_off_method_accessibility">Accessibility</string>
+    <string name="screen_off_method_input">Input</string>
+    <string name="screen_off_widget_input_permission_id">Screen off widget - Input</string>
+    <string name="require_double_tap_title">Require double tap</string>
+    <string name="require_double_tap_desc">To screen off</string>
     <string name="feat_statusbar_icons_title">Εικονίδια γραμμής κατάστασης</string>
     <string name="feat_statusbar_icons_desc">Ελέγξτε την ορατότητα των εικονιδίων της γραμμής κατάστασης</string>
     <string name="feat_caffeinate_title">Καφεΐνη</string>
