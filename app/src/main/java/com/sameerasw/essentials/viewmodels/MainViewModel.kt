@@ -117,6 +117,7 @@ class MainViewModel : ViewModel() {
     val isFlashlightPulseUseLightingApps = mutableStateOf(true)
     val flashlightPulseMaxIntensity = mutableFloatStateOf(0.5f)
     val isFlashlightPulseDisableOnDnd = mutableStateOf(true)
+    val isFlashlightPocketTurnOffEnabled = mutableStateOf(false)
     val isLocationPermissionGranted = mutableStateOf(false)
     val isBackgroundLocationPermissionGranted = mutableStateOf(false)
     val isFullScreenIntentPermissionGranted = mutableStateOf(false)
@@ -616,6 +617,10 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_FLASHLIGHT_PULSE_MAX_INTENSITY -> {
                         flashlightPulseMaxIntensity.floatValue =
                             settingsRepository.getFloat(key, 0.5f)
+                    }
+
+                    SettingsRepository.KEY_FLASHLIGHT_POCKET_TURN_OFF_ENABLED -> {
+                        isFlashlightPocketTurnOffEnabled.value = settingsRepository.getBoolean(key)
                     }
 
                     SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED -> {
@@ -1262,6 +1267,8 @@ class MainViewModel : ViewModel() {
             SettingsRepository.KEY_FLASHLIGHT_PULSE_DISABLE_ON_DND,
             true
         )
+        isFlashlightPocketTurnOffEnabled.value =
+            settingsRepository.getBoolean(SettingsRepository.KEY_FLASHLIGHT_POCKET_TURN_OFF_ENABLED)
         isPitchBlackThemeEnabled.value =
             settingsRepository.getBoolean(SettingsRepository.KEY_PITCH_BLACK_THEME_ENABLED)
 
@@ -3634,6 +3641,14 @@ class MainViewModel : ViewModel() {
         isFlashlightAlwaysTurnOffEnabled.value = enabled
         settingsRepository.putBoolean(
             SettingsRepository.KEY_FLASHLIGHT_ALWAYS_TURN_OFF_ENABLED,
+            enabled
+        )
+    }
+
+    fun setFlashlightPocketTurnOffEnabled(enabled: Boolean, context: Context) {
+        isFlashlightPocketTurnOffEnabled.value = enabled
+        settingsRepository.putBoolean(
+            SettingsRepository.KEY_FLASHLIGHT_POCKET_TURN_OFF_ENABLED,
             enabled
         )
     }
