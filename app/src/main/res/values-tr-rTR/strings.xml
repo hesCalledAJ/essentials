@@ -60,7 +60,7 @@
     <string name="action_cycle_sound_modes">Ses modlarını değiştir</string>
     <string name="action_circle_to_search">Aramak için Daire</string>
     <string name="action_like_song">Şu anki şarkıyı beğen</string>
-    <string name="like_song_settings_title">Şarkı beğenme ayarları</string>
+    <string name="like_song_settings_title">Şarkıyı beğenme ayarları</string>
     <string name="like_song_settings_desc">Bu özellik, o anda oynatılan medyayı algılamak ve benzer eylemi tetiklemek için bildirim erişimi gerektirir. Lütfen aşağıdan etkinleştirin.</string>
     <string name="like_song_toast_enabled">Tost mesajını göster</string>
     <string name="like_song_aod_overlay_title">AOD\'de kaplamayı göster</string>
