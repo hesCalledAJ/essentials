@@ -12,7 +12,7 @@
     <string name="freeze_shortcut_long_label">Apri congelamento app</string>
     <string name="frozen_app_shortcut_label">App congelata</string>
     <string name="screen_off_widget_label">Widget Spegni-scherno</string>
-    <string name="app_freezing_tile_label">Congelamento app</string>
+    <string name="app_freezing_tile_label">Congelamento aop</string>
     <string name="flashlight_pulse_tile_label">Flash della torcia</string>
     <string name="check_pre_releases_label">Controlla le pre-release</string>
     <string name="check_pre_releases_desc">Potrebbe essere instabile</string>
@@ -80,8 +80,8 @@
     <string name="feat_notification_glance_title">Anteprima notifiche</string>
     <string name="feat_notification_glance_desc">Mantieni il Display sempre attivo abilitato in presenza di notifiche in sospeso</string>
     <string name="notification_glance_same_as_lighting_title">Stesse app di illuminazione di notifica</string>
-    <string name="notification_glance_desc">Questa funzione attiva dinamicamente il Display sempre attivo alla ricezione di una notifica dalle app selezionate, e lo disattiva una volta rimosse tutte le notifiche corrispondenti. Scegli le app o usa la stessa selezione di illuminazione di notifica.</string>
-    <string name="grant_notification_access">Consenti accesso alle notifiche</string>
+    <string name="notification_glance_desc">Questa funzione attiva dinamicamente l\'Always on Display alla ricezione di una notifica dalle app selezionate, e lo disattiva una volta rimosse tutte le notifiche corrispondenti. Scegli le app o usa la stessa selezione di illuminazione di notifica.</string>
+    <string name="grant_notification_access">Consenti l\'accesso alle notifiche</string>
     <string name="action_toggle_media_volume">Attiva/disattiva volume dei media</string>
     <string name="button_remap_screen_off_hint">Quando lo schermo è spento, premi a lungo il pulsante selezionato per attivare l\'azione assegnata. Sui dispositivi Pixel, questa azione viene attivata solo se l\'AOD è attivo a causa di limitazioni del sistema.</string>
     <string name="button_remap_screen_on_hint">Quando lo schermo è acceso, tieni premuto il tasto selezionato per avviare l\'azione selezionata.</string>
@@ -106,11 +106,11 @@
     <string name="caffeinate_notification_title">Caffeina attivo</string>
     <string name="caffeinate_active">Attivo</string>
     <string name="caffeinate_notification_desc">Lo schermo viene mantenuto attivo</string>
-    <string name="caffeinate_battery_optimization_title">Ignora ottimizzazione della batteria</string>
+    <string name="caffeinate_battery_optimization_title">Ignora ottimizzazione batteria</string>
     <string name="caffeinate_abort_screen_off_title">Annulla con schermo spento</string>
-    <string name="caffeinate_skip_countdown_title">Salta il conto alla rovescia</string>
+    <string name="caffeinate_skip_countdown_title">Salta conto alla rovescia</string>
     <string name="caffeinate_skip_countdown_desc">Avvia subito Caffeina</string>
-    <string name="caffeinate_timeout_presets_title">Timeout predefiniti</string>
+    <string name="caffeinate_timeout_presets_title">Predefiniti timeout</string>
     <string name="caffeinate_timeout_presets_desc">Seleziona le durate disponibili per il riquadro Impostazioni rapide</string>
     <string name="caffeinate_timeout_5m">5m</string>
     <string name="caffeinate_timeout_10m">10m</string>
@@ -162,9 +162,9 @@
     <string name="action_enable_in_settings">Abilita nelle impostazioni</string>
     <string name="freeze_dont_freeze_active_apps_title">Non congelare le app attive</string>
     <string name="perm_usage_stats_title">Statistiche di utilizzo</string>
-    <string name="perm_usage_stats_desc">Richiesto per rilevare quali app sono in primo piano ed evitarne il congelamento</string>
+    <string name="perm_usage_stats_desc">Necessario per rilevare quali app sono in primo piano ed evitarne il congelamento</string>
     <string name="perm_usage_stats_desc_app_lock">Richiesto per rilevare le app in primo piano per la funzione Blocco app quando non si usa l\'accessibilità.</string>
-    <string name="perm_notif_listener_desc_freeze">Richiesto per rilevare la riproduzione di contenuti multimediali e le notifiche attive, evitandone il congelamento</string>
+    <string name="perm_notif_listener_desc_freeze">Necessario per rilevare la riproduzione di contenuti multimediali e le notifiche attive, evitandone il congelamento</string>
     <string name="freeze_mode_title">Modalità di congelamento</string>
     <string name="freeze_mode_freeze">Congelamento</string>
     <string name="freeze_mode_suspend">Sospensione app</string>
@@ -217,7 +217,7 @@
     <string name="tile_bubbles">Bolle</string>
     <string name="tile_sensitive_content">Contenuti sensibili</string>
     <string name="tile_tap_to_wake">Tocca per riattivare</string>
-    <string name="tile_aod">Display sempre attivo</string>
+    <string name="tile_aod">Display sempre sttivo</string>
     <string name="tile_caffeinate">Caffeina</string>
     <string name="tile_sound_mode">Modalità audio</string>
     <string name="tile_notification_lighting">Illuminazione di notifica</string>
@@ -336,7 +336,7 @@
     <string name="stb_privacy_chip">La fotocamera e il microfono utilizzano chip</string>
     <string name="smart_data_title">Dati intelligenti</string>
     <string name="permission_read_phone_state_title">Lettura stato del telefono</string>
-    <string name="permission_read_phone_state_desc">Richiesto per rilevare il tipo di rete per la funzione Dati intelligenti</string>
+    <string name="permission_read_phone_state_desc">Necessario per rilevare il tipo di rete per la funzione Dati intelligenti</string>
     <string name="permission_read_phone_state_desc_call_vibrations">Richiesto per rilevare i cambiamenti di stato delle chiamate e attivare il feedback aptico.</string>
     <string name="settings_section_smart_visibility">Visibilità intelligente</string>
     <string name="smart_wifi_title">Wi-Fi intelligente</string>
@@ -424,7 +424,7 @@
     <string name="feat_link_actions_desc">Gestisci i link con più applicazioni</string>
     <string name="feat_snooze_notifications_title">Posticipa le notifiche di sistema</string>
     <string name="feat_snooze_notifications_desc">Posticipa le notifiche persistenti</string>
-    <string name="feat_qs_tiles_title">Riquadri delle impostazioni rapide</string>
+    <string name="feat_qs_tiles_title">Riquadri Impostazioni rapide</string>
     <string name="feat_qs_tiles_desc">Visualizza tutto</string>
     <string name="feat_button_remap_title">Riassegnazione pulsanti</string>
     <string name="feat_button_remap_desc">Riassegna le azioni dei tasti fisici</string>
@@ -452,7 +452,7 @@
     <string name="feat_lock_from_watch_title">Blocca dall\'orologio</string>
     <string name="feat_lock_from_watch_desc">Blocca il telefono da remoto</string>
     <string name="remote_lock_mode_title">Modalità di blocco</string>
-    <string name="remote_lock_mode_screen_off">Schermo spento</string>
+    <string name="remote_lock_mode_screen_off">Spegni lo schermo</string>
     <string name="remote_lock_mode_lock">Blocca</string>
     <string name="remote_lock_mode_admin_note">L\'uso del blocco come amministratore del dispositivo disattiverà la biometria</string>
     <string name="watch_connected_status">Connesso</string>
@@ -520,9 +520,9 @@
     <string name="search_skip_silent_title">Salta le notifiche silenziose</string>
     <string name="search_skip_silent_desc">Non mostrare l\'illuminazione per le notifiche silenziose</string>
     <string name="search_flashlight_pulse_title">Flash della torcia</string>
-    <string name="search_flashlight_pulse_desc">Fai pulsare dolcemente il flash per le nuove notifiche</string>
+    <string name="search_flashlight_pulse_desc">Fai pulsare dolcemente la torcia per le nuove notifiche</string>
     <string name="search_only_facing_down_title">Solo a schermo in giù</string>
-    <string name="search_only_facing_down_desc">Fai pulsare il flash solo quando il dispositivo è a schermo in giù</string>
+    <string name="search_only_facing_down_desc">Fai pulsare la torcia solo quando il dispositivo è a schermo in giù</string>
     <string name="snooze_no_channels_discovered">Nessun canale di sistema ancora scoperto. Appariranno qui una volta rilevati.</string>
     <string name="search_qs_blur_title">Sfocatura interfaccia</string>
     <string name="search_qs_blur_desc">Attiva/disattiva la sfocatura dell\'interfaccia a livello di sistema</string>
@@ -539,7 +539,7 @@
     <string name="search_qs_sound_title">Modalità audio</string>
     <string name="search_qs_sound_desc">Alterna modalità audio (Suoneria/Vibrazione/Silenzioso)</string>
     <string name="search_qs_lighting_title">Illuminazione di notifica</string>
-    <string name="search_qs_lighting_desc">Attiva o disattiva il servizio di illuminazione di notifica</string>
+    <string name="search_qs_lighting_desc">Attiva/disattiva il servizio di illuminazione di notifica</string>
     <string name="search_qs_night_light_title">Luce notturna dinamica</string>
     <string name="search_qs_night_light_desc">Interruttore automazione Luce notturna</string>
     <string name="search_qs_locked_sec_title">Blocco di sicurezza</string>
@@ -551,12 +551,12 @@
     <string name="search_qs_freeze_title">Congelamento app</string>
     <string name="search_qs_freeze_desc">Avvia griglia di congelamento app</string>
     <string name="search_qs_pulse_title">Flash della torcia</string>
-    <string name="search_qs_pulse_desc">Attiva o disattiva il flash della torcia per le notifiche</string>
-    <string name="search_qs_stay_awake_desc">Attiva o disattiva l\'opzione sviluppatore Rimani attivo</string>
+    <string name="search_qs_pulse_desc">Attiva/disattiva flash della torcia per le notifiche</string>
+    <string name="search_qs_stay_awake_desc">Attiva/disattiva opzione sviluppatore Rimani attivo</string>
     <string name="search_qs_private_dns_title">DNS privato</string>
     <string name="search_qs_private_dns_desc">Alterna modalità DNS privato (Disattivato/Automatico/Nome host)</string>
     <string name="search_qs_usb_debugging_title">Debug USB</string>
-    <string name="search_qs_usb_debugging_desc">Attiva o disattiva l\'opzione sviluppatore Debug USB</string>
+    <string name="search_qs_usb_debugging_desc">Attiva/disattiva opzione sviluppatore Debug USB</string>
     <string name="search_qs_refresh_rate_title">Frequenza di aggiornamento</string>
     <string name="search_qs_refresh_rate_desc">Alterna tra le frequenze di aggiornamento predefinite di sistema e preimpostate</string>
     <string name="search_remap_enable_title">Abilita riassegnazione pulsanti</string>
@@ -722,13 +722,13 @@
     <string name="action_what_is_this">Cos\'è questo?</string>
     <string name="update_available_title">Aggiornamento disponibile</string>
     <string name="about_desc_your_android">Dai un\'occhiata alle specifiche hardware e software del tuo dispositivo. Le informazioni provengono da GSMArena e dalle proprietà del sistema per garantirti una giusta panoramica del tuo dispositivo.</string>
-    <string name="about_desc_essentials_on_display">Essentials on Display mostra un elemento in sovrimpressione In riproduzione sulla schermata di blocco quando c\'è della musica in riproduzione e cambia il brano.\n\nSe il tuo dispositivo non supporta gli elementi in sovrimpressione sul Display sempre attivo, puoi scegliere come alternativa il salvaschermo, aggiunto nelle impostazioni di Android, durante la ricarica.</string>
+    <string name="about_desc_essentials_on_display">Essentials su Display mostra un elemento in sovrimpressione In riproduzione sulla schermata di blocco quando c\'è della musica in riproduzione e cambia il brano.\n\nSe il tuo dispositivo non supporta gli elementi in sovrimpressione sul Display sempre attivo, puoi scegliere come alternativa il salvaschermo, aggiunto nelle impostazioni di Android, durante la ricarica.</string>
     <string name="about_desc_notification_lighting">Illuminazione di notifica aggiunge uno splendido effetto di luce lungo i bordi quando ricevi delle notifiche.\n\nPuoi personalizzare lo stile dell\'animazione, i colori e il comportamento. Funziona sia a schermo spento (a seconda del produttore) sia sopra l\'applicazione corrente. Scegli le app, la priorità delle notifiche o il tipo di comportamento da attivare tramite i controlli dedicati. Se il produttore del tuo dispositivo non supporta gli elementi in sovrimpressione sul Display sempre attivo, usa l\'opzione Display ambient disponibile qui sotto.</string>
     <string name="about_desc_screen_off_widget">Spegni facilmente lo schermo con un tocco su un widget ridimensionabile trasparente che non aggiunge icone o elementi inutili alla schermata iniziale.</string>
     <string name="about_desc_statusbar_icons">Assumi il pieno controllo sulle icone della barra di stato.\n\nNascondi icone specifiche come Wi-Fi, Bluetooth o dati mobili per mantenere pulita la barra di stato. Puoi anche personalizzare il formato dell\'orologio e l\'indicatore della batteria con alcuni controlli intelligenti. Questo è l\'elenco dei controlli AOSP disponibili, quindi il sistema operativo del tuo dispositivo potrebbe non rispettare tutti i controlli.</string>
     <string name="about_desc_caffeinate">Caffeina impedisce allo schermo di spegnersi automaticamente.\n\nMantieni lo schermo attivo per una durata specifica o indefinitamente. Utile quando leggi articoli lunghi o consulti una ricetta.</string>
     <string name="about_desc_maps_power_saving">Ottieni l\'esclusiva modalità Risparmio energetico Maps della serie Pixel 10 con lo sfondo nero assoluto minimalista, da visualizzare sopra la schermata di blocco su qualsiasi dispositivo Android. Avvia una sessione di navigazione, spegni lo schermo e riaccendilo. </string>
-    <string name="about_desc_flashlight_pulse">Fai pulsare il flash quando ricevi una notifica.\n\nSui dispositivi che supportano la regolazione dell\'intensità del flash a livello hardware, la pulsazione presenterà un\'animazione fluida.</string>
+    <string name="about_desc_flashlight_pulse">Attiva la torcia quando ricevi una notifica.\n\nSui dispositivi dotati di supporto hardware per la regolazione dell\'intensità della torcia, il lampeggiamento presenterà un\'animazione fluida.</string>
     <string name="about_desc_snooze_notifications">Posticipa le fastidiose notifiche di sistema persistenti che non possono essere modificate per impostazione predefinita.\n\nAttendi che arrivi la notifica e poi accedi a questa funzione, dove verrà elencato il relativo canale di notifica. Selezionalo per posticiparla a partire dalla volta successiva.\n\nTutte le notifiche posticipate rimarranno comunque accessibili dalla cronologia delle notifiche di Android.</string>
     <string name="about_desc_quick_settings_tiles">Aggiungi riquadri personalizzati al pannello Impostazioni rapide.\n\nTieni premuto su uno di essi per scoprire cosa fa.</string>
     <string name="about_desc_button_remap">Riassegna i pulsanti fisici per eseguire azioni e scorciatoie differenti.\n\nPersonalizza cosa accade quando esegui una pressione prolungata sui pulsanti del volume in determinate condizioni.\n\nAlcuni comportamenti, come l\'attivazione a schermo spento o i controlli della torcia, potrebbero dipendere dall\'implementazione del produttore e potrebbero non funzionare su tutti i dispositivi come previsto. Per alcuni scenari si potrebbe rimediare utilizzando i permessi di Shizuku, ma l\'esperienza potrebbe non essere la stessa a causa delle diverse implementazioni.</string>
@@ -744,7 +744,7 @@
     <string name="location_reached_cancel_btn">Annulla</string>
     <string name="location_reached_resolving">Rilevamento posizione…</string>
     <string name="location_reached_last_trip">Ultimo viaggio</string>
-    <string name="location_reached_saved_destinations">Destinazioni salvate</string>
+    <string name="location_reached_saved_destinations">Destinazione salvate</string>
     <string name="location_reached_no_saved_dest">Nessuna destinazione ancora salvata.</string>
     <string name="location_reached_delete">Elimina destinazione</string>
     <string name="location_reached_tracking_now">In tracciamento</string>
@@ -810,7 +810,7 @@
     <string name="diy_action_low_power_off">Disattiva risparmio energetico</string>
     <string name="diy_action_dim_wallpaper">Attenua sfondo</string>
     <string name="diy_dim_wallpaper_desc">Questa azione richiede che Shizuku o Root regolino l\'attenuazione dello sfondo di sistema.</string>
-    <string name="diy_select_trigger">Seleziona evento</string>
+    <string name="diy_select_trigger">Seleziona attivazione</string>
     <string name="diy_create_app_title">App</string>
     <string name="diy_create_app_desc">Automatizza in base all\'app aperta</string>
     <string name="diy_select_state">Seleziona stato</string>
@@ -894,12 +894,12 @@
     <string-array name="keywords_keyboard">
         <item>tastiera</item>
         <item>altezza</item>
-        <item>spaziatura</item>
+        <item>spaziatura interna</item>
         <item>aptico</item>
         <item>ingresso</item>
     </string-array>
     <string-array name="keywords_flashlight">
-        <item>luce</item>
+        <item>illuminazione</item>
         <item>torcia</item>
     </string-array>
     <string-array name="keywords_flashlight_pulse">
@@ -1221,7 +1221,7 @@
     <string name="action_refresh">Aggiorna</string>
     <!-- Added Missing Group Strings -->
     <string name="feat_sound_modes_title">Riquadro modalità audio</string>
-    <string name="feat_sound_modes_desc">Riquadro delle impostazioni rapide per attivare o disattivare la modalità audio</string>
+    <string name="feat_sound_modes_desc">Riquadro impostazioni rapide per attivare o disattivare la modalità audio</string>
     <string name="search_sound_mode_show_slider_title">Mostra dispositivo di scorrimento</string>
     <string name="search_sound_mode_show_slider_desc">Mostra il cursore del volume nel riquadro</string>
     <string name="search_sound_mode_behavior_title">Comportamento del ciclo</string>
@@ -1427,7 +1427,7 @@
     <string name="lock_screen_clock_flex">Flex</string>
     <string name="lock_screen_clock_growth">Espansione</string>
     <string name="lock_screen_clock_handwritten">Scritto a mano</string>
-    <string name="lock_screen_clock_inflate">Rigonfiamento</string>
+    <string name="lock_screen_clock_inflate">Gonfia</string>
     <string name="lock_screen_clock_metro">Metro</string>
     <string name="lock_screen_clock_numoverlap">Numero sovrapposto</string>
     <string name="lock_screen_clock_weather">Meteo</string>
@@ -1440,7 +1440,7 @@
     <string name="label_weight">Peso</string>
     <string name="label_width">Larghezza</string>
     <string name="label_grade">Grado</string>
-    <string name="label_roundness">Arrotondamento</string>
+    <string name="label_roundness">Rotondità</string>
     <string name="label_color_tone">Luminosità</string>
     <string name="label_variation">Variazione</string>
     <string name="label_color">Colore</string>
