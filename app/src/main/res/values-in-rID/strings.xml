@@ -97,8 +97,8 @@
     <string name="flashlight_live_update_title">Live update</string>
     <string name="flashlight_live_update_desc">Tampilkan kecerahan di bar status</string>
     <string name="settings_section_other">Lainnya</string>
-    <string name="flashlight_always_off_title">Always turn off flashlight</string>
-    <string name="flashlight_always_off_desc">Even while display is on</string>
+    <string name="flashlight_always_off_title">Selalu matikan senter</string>
+    <string name="flashlight_always_off_desc">Hanya ketika layar hidup</string>
     <string name="content_desc_settings">Pengaturan</string>
     <!-- Caffeinate / Permissions -->
     <string name="permission_show_notification_title">Tampilkan notifikasi</string>
@@ -160,7 +160,7 @@
     <string name="delay_manual">Manual</string>
     <string name="freeze_auto_freeze_section">Auto freeze apps</string>
     <string name="freeze_automation_hint">Freeze selected apps when the device locks. Choose a delay to avoid freezing apps if you unlock the screen shortly after turning it off.</string>
-    <string name="freeze_warning">Membekukan aplikasi sistem sangat berbahagia dan menimbulkan masalah tak terduga.</string>
+    <string name="freeze_warning">Membekukan aplikasi sistem sangat berbahaya dan menimbulkan masalah tak terduga.</string>
     <string name="action_enable_in_settings">Hidupkan di pengaturan</string>
     <string name="freeze_dont_freeze_active_apps_title">Jangan bekukan aplikasi yang aktif</string>
     <string name="perm_usage_stats_title">Akses penggunaan</string>
