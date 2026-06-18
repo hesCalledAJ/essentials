@@ -40,6 +40,8 @@ Essential tools, mods and workarounds for Pixels and other Androids
   <a href="https://www.androidauthority.com/good-lock-for-pixel-essentials-app-hands-on-3670994/"><img width="20%" alt="Frame 7" src="https://github.com/user-attachments/assets/5469b309-6929-4775-93c5-7ee2f0d57ba1" /></a>
 </p>
 
+> A little bit away from the project prioritizing on AirSync but will be back sooooon (っ◕‿◕)っ
+
 ## Navigation
 
 - [Features](#features)
