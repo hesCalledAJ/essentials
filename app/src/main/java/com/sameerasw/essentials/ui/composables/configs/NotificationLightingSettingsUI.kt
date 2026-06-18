@@ -58,6 +58,8 @@ import com.sameerasw.essentials.ui.components.pickers.NotificationLightingSystem
 import com.sameerasw.essentials.ui.components.sheets.AppSelectionSheet
 import com.sameerasw.essentials.ui.components.sheets.PermissionItem
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
+import com.sameerasw.essentials.ui.components.sheets.SweepShapesBottomSheet
+import com.sameerasw.essentials.ui.components.cards.FeatureCard
 import com.sameerasw.essentials.ui.components.sliders.ConfigSliderItem
 import com.sameerasw.essentials.ui.modifiers.highlight
 import com.sameerasw.essentials.utils.HapticUtil
@@ -79,6 +81,7 @@ fun NotificationLightingSettingsUI(
     // App selection Logic
     var showAppSelectionSheet by remember { mutableStateOf(false) }
     var showPermissionsSheet by remember { mutableStateOf(false) }
+    var showSweepShapesSheet by remember { mutableStateOf(false) }
 
     // Corner radius state
 
@@ -413,6 +416,22 @@ fun NotificationLightingSettingsUI(
                         }
                     }
                 )
+
+                if (viewModel.notificationLightingSweepRandomShapes.value) {
+                    FeatureCard(
+                        title = stringResource(R.string.notification_lighting_sweep_select_shapes_title),
+                        description = stringResource(R.string.notification_lighting_sweep_select_shapes_desc),
+                        iconRes = R.drawable.rounded_circles_24,
+                        isEnabled = true,
+                        showToggle = false,
+                        hasMoreSettings = true,
+                        onToggle = {},
+                        onClick = {
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            showSweepShapesSheet = true
+                        }
+                    )
+                }
 
                 ConfigSliderItem(
                     title = stringResource(R.string.notification_lighting_sweep_thickness_title),
@@ -803,6 +822,13 @@ fun NotificationLightingSettingsUI(
                     )
                 },
                 context = context
+            )
+        }
+
+        if (showSweepShapesSheet) {
+            SweepShapesBottomSheet(
+                viewModel = viewModel,
+                onDismissRequest = { showSweepShapesSheet = false }
             )
         }
 

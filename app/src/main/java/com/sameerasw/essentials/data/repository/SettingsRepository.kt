@@ -236,6 +236,8 @@ class SettingsRepository(private val context: Context) {
         const val KEY_SHUT_UP_SELECTED_APPS = "shut_up_selected_apps"
         const val KEY_SHUT_UP_ORIGINAL_SETTINGS = "shut_up_original_settings"
         const val KEY_SHUT_UP_ATTEMPT_SHIZUKU_RESTART = "shut_up_attempt_shizuku_restart"
+        const val KEY_SHUT_UP_RESTORE_DELAY = "shut_up_restore_delay"
+        const val KEY_EDGE_LIGHTING_SWEEP_SELECTED_SHAPES = "edge_lighting_sweep_selected_shapes"
         const val KEY_DISABLE_ROTATION_SUGGESTION = "disable_rotation_suggestion"
 
         const val KEY_LOCK_SCREEN_CLOCK_WEIGHT = "lock_screen_clock_weight"
@@ -859,6 +861,31 @@ class SettingsRepository(private val context: Context) {
 
     fun setShutUpAttemptShizukuRestartEnabled(enabled: Boolean) =
         putBoolean(KEY_SHUT_UP_ATTEMPT_SHIZUKU_RESTART, enabled)
+
+    fun getShutUpRestoreDelay(): Int =
+        getInt(KEY_SHUT_UP_RESTORE_DELAY, 10)
+
+    fun setShutUpRestoreDelay(delaySeconds: Int) =
+        putInt(KEY_SHUT_UP_RESTORE_DELAY, delaySeconds)
+
+    fun getEdgeLightingSweepSelectedShapes(): Set<String> {
+        val defaultShapes = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.allShapesWithNames.map { it.first }.toSet()
+        val json = prefs.getString(KEY_EDGE_LIGHTING_SWEEP_SELECTED_SHAPES, null)
+        return if (json != null) {
+            try {
+                gson.fromJson(json, Array<String>::class.java).toSet()
+            } catch (e: Exception) {
+                defaultShapes
+            }
+        } else {
+            defaultShapes
+        }
+    }
+
+    fun saveEdgeLightingSweepSelectedShapes(shapes: Set<String>) {
+        val json = gson.toJson(shapes)
+        putString(KEY_EDGE_LIGHTING_SWEEP_SELECTED_SHAPES, json)
+    }
 
     fun removeTrackedRepo(fullName: String) {
         val current = getTrackedRepos().toMutableList()

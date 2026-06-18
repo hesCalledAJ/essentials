@@ -33,6 +33,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.data.repository.SettingsRepository
 import androidx.compose.ui.graphics.Color as ComposeColor
 
 /**
@@ -239,7 +240,8 @@ object OverlayHelper {
             overlay.setBackgroundColor(Color.BLACK)
         }
 
-        val sweepView = SweepShapeView(context, color, strokeDp, randomShapes).apply {
+        val selectedShapes = SettingsRepository(context).getEdgeLightingSweepSelectedShapes()
+        val sweepView = SweepShapeView(context, color, strokeDp, randomShapes, selectedShapes).apply {
             tag = "sweep_view"
             alpha = 0f
             layoutParams = FrameLayout.LayoutParams(
@@ -256,13 +258,14 @@ object OverlayHelper {
         context: Context,
         val color: Int,
         val strokeDp: Float,
-        val useRandomShapes: Boolean
+        val useRandomShapes: Boolean,
+        val selectedShapes: Set<String>
     ) : View(context) {
         var centerX: Float = 0f
         var centerY: Float = 0f
 
         private val polygon = if (useRandomShapes) {
-            AmbientMusicShapeHelper.getRandomPolygon()
+            AmbientMusicShapeHelper.getRandomPolygonFromSet(selectedShapes)
         } else null
 
         private val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {

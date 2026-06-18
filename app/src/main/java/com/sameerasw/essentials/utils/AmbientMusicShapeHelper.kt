@@ -8,36 +8,45 @@ import java.util.Random
 
 object AmbientMusicShapeHelper {
 
-    private val allShapes = listOf(
-        MaterialShapes.Circle,
-        MaterialShapes.Square,
-        MaterialShapes.Slanted,
-        MaterialShapes.Arch,
-        MaterialShapes.Oval,
-        MaterialShapes.Pill,
-        MaterialShapes.Triangle,
-        MaterialShapes.Arrow,
-        MaterialShapes.Diamond,
-        MaterialShapes.ClamShell,
-        MaterialShapes.Pentagon,
-        MaterialShapes.Gem,
-        MaterialShapes.Sunny,
-        MaterialShapes.VerySunny,
-        MaterialShapes.Cookie4Sided,
-        MaterialShapes.Cookie6Sided,
-        MaterialShapes.Cookie7Sided,
-        MaterialShapes.Cookie9Sided,
-        MaterialShapes.Cookie12Sided,
-        MaterialShapes.Clover4Leaf,
-        MaterialShapes.Clover8Leaf,
-        MaterialShapes.SoftBurst,
-        MaterialShapes.Flower,
-        MaterialShapes.PuffyDiamond,
-        MaterialShapes.Ghostish,
-        MaterialShapes.PixelCircle,
-        MaterialShapes.Bun,
-        MaterialShapes.Heart
+    val allShapesWithNames = listOf(
+        "Circle" to MaterialShapes.Circle,
+        "Square" to MaterialShapes.Square,
+        "Slanted" to MaterialShapes.Slanted,
+        "Arch" to MaterialShapes.Arch,
+        "Oval" to MaterialShapes.Oval,
+        "Pill" to MaterialShapes.Pill,
+        "Triangle" to MaterialShapes.Triangle,
+        "Arrow" to MaterialShapes.Arrow,
+        "Diamond" to MaterialShapes.Diamond,
+        "ClamShell" to MaterialShapes.ClamShell,
+        "Pentagon" to MaterialShapes.Pentagon,
+        "Gem" to MaterialShapes.Gem,
+        "Sunny" to MaterialShapes.Sunny,
+        "VerySunny" to MaterialShapes.VerySunny,
+        "Cookie4Sided" to MaterialShapes.Cookie4Sided,
+        "Cookie6Sided" to MaterialShapes.Cookie6Sided,
+        "Cookie7Sided" to MaterialShapes.Cookie7Sided,
+        "Cookie9Sided" to MaterialShapes.Cookie9Sided,
+        "Cookie12Sided" to MaterialShapes.Cookie12Sided,
+        "Clover4Leaf" to MaterialShapes.Clover4Leaf,
+        "Clover8Leaf" to MaterialShapes.Clover8Leaf,
+        "SoftBurst" to MaterialShapes.SoftBurst,
+        "Flower" to MaterialShapes.Flower,
+        "PuffyDiamond" to MaterialShapes.PuffyDiamond,
+        "Ghostish" to MaterialShapes.Ghostish,
+        "PixelCircle" to MaterialShapes.PixelCircle,
+        "Bun" to MaterialShapes.Bun,
+        "Heart" to MaterialShapes.Heart
     )
+
+    private val allShapes = allShapesWithNames.map { it.second }
+
+    fun getRandomPolygonFromSet(selectedNames: Set<String>): RoundedPolygon {
+        val filtered = allShapesWithNames.filter { selectedNames.contains(it.first) }
+        if (filtered.isEmpty()) return MaterialShapes.Cookie12Sided
+        val random = Random()
+        return filtered[random.nextInt(filtered.size)].second
+    }
 
     fun getShapePath(seed: String?, size: Float, isRandomEnabled: Boolean = true): Path {
         return getPolygon(seed, isRandomEnabled).toAndroidPath(size)
