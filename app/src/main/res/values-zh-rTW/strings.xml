@@ -52,7 +52,7 @@
     <string name="volume_up">音量上</string>
     <string name="volume_down">音量下</string>
     <string name="action_toggle_flashlight">手電筒開關</string>
-    <string name="action_media_play_pause">媒体播放/暂停</string>
+    <string name="action_media_play_pause">播放/暫停媒體</string>
     <string name="action_media_next">媒体下一首</string>
     <string name="action_media_previous">媒体上一首</string>
     <string name="action_toggle_vibrate">开关振动</string>
