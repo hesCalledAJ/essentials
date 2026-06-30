@@ -832,7 +832,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla s
     <string name="diy_action_toggle_media_volume">Activar/desactivar el volumen multimedia</string>
     <string name="diy_action_like_current_song">Me gusta la canción actual</string>
     <string name="diy_action_circle_to_search">Rodea para buscar</string>
-    <string name="diy_action_pin_app">Pin Foreground App</string>
+    <string name="diy_action_pin_app">Fijar la aplicación en primer plano</string>
     <string name="diy_dim_wallpaper_desc">Esta acción requiere Shizuku o acceso Root para ajustar el atenuado del fondo de pantalla del sistema.</string>
     <string name="diy_select_trigger">Seleccionar desencadenante</string>
     <string name="diy_create_app_title">Aplicación</string>
