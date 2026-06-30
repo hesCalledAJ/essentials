@@ -180,6 +180,7 @@
     <string name="flashlight_pulse_facedown_title">只在螢幕朝下時</string>
     <string name="flashlight_pulse_same_as_lighting_title">選擇與通知光效設定相同的應用程式</string>
     <string name="flashlight_pulse_max_brightness">最大亮度</string>
+    <string name="flashlight_pulse_disable_on_dnd_title">Do not trigger on DND</string>
     <string name="flashlight_pulse_preview">閃爍預覽</string>
     <string name="settings_section_style">風格</string>
     <string name="notification_lighting_stroke_adjustment_section">邊框調整</string>
