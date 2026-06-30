@@ -113,6 +113,7 @@ class MainViewModel : ViewModel() {
     val isFlashlightPulseFacedownOnly = mutableStateOf(true)
     val isFlashlightPulseUseLightingApps = mutableStateOf(true)
     val flashlightPulseMaxIntensity = mutableFloatStateOf(0.5f)
+    val isFlashlightPulseDisableOnDnd = mutableStateOf(true)
     val isLocationPermissionGranted = mutableStateOf(false)
     val isBackgroundLocationPermissionGranted = mutableStateOf(false)
     val isFullScreenIntentPermissionGranted = mutableStateOf(false)
@@ -1172,6 +1173,10 @@ class MainViewModel : ViewModel() {
         flashlightPulseMaxIntensity.floatValue = settingsRepository.getFloat(
             SettingsRepository.KEY_FLASHLIGHT_PULSE_MAX_INTENSITY,
             0.5f
+        )
+        isFlashlightPulseDisableOnDnd.value = settingsRepository.getBoolean(
+            SettingsRepository.KEY_FLASHLIGHT_PULSE_DISABLE_ON_DND,
+            true
         )
         isPitchBlackThemeEnabled.value =
             settingsRepository.getBoolean(SettingsRepository.KEY_PITCH_BLACK_THEME_ENABLED)
@@ -2571,6 +2576,14 @@ class MainViewModel : ViewModel() {
         settingsRepository.putFloat(
             SettingsRepository.KEY_FLASHLIGHT_PULSE_MAX_INTENSITY,
             intensity
+        )
+    }
+
+    fun setFlashlightPulseDisableOnDnd(enabled: Boolean, context: Context) {
+        isFlashlightPulseDisableOnDnd.value = enabled
+        settingsRepository.putBoolean(
+            SettingsRepository.KEY_FLASHLIGHT_PULSE_DISABLE_ON_DND,
+            enabled
         )
     }
 
