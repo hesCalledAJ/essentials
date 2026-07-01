@@ -1,75 +1,73 @@
 package com.sameerasw.essentials.ui.activities
 
+import android.app.Activity
+import android.appwidget.AppWidgetHost
+import android.appwidget.AppWidgetManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.ToggleButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
-import androidx.compose.material3.RadioButton
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sameerasw.essentials.R
+import com.sameerasw.essentials.domain.model.Feature
+import com.sameerasw.essentials.services.widgets.WidgetScraperService
 import com.sameerasw.essentials.ui.components.EssentialsFloatingToolbar
+import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
+import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
+import com.sameerasw.essentials.ui.components.sheets.FeatureHelpBottomSheet
+import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
+import com.sameerasw.essentials.ui.modifiers.BlurDirection
+import com.sameerasw.essentials.ui.modifiers.progressiveBlur
 import com.sameerasw.essentials.ui.theme.EssentialsTheme
 import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.viewmodels.MainViewModel
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import com.sameerasw.essentials.domain.model.Feature
-import com.sameerasw.essentials.ui.components.sheets.FeatureHelpBottomSheet
-import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
 import android.content.Context
 import android.content.Intent
-import com.sameerasw.essentials.ui.components.cards.IconToggleItem
-import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.foundation.layout.navigationBars
-import com.sameerasw.essentials.ui.modifiers.BlurDirection
-import com.sameerasw.essentials.ui.modifiers.progressiveBlur
 
 class PixelSearchbarSettingsActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -110,7 +108,7 @@ class PixelSearchbarSettingsActivity : ComponentActivity() {
                 Scaffold(
                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
                     containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                ) { innerPadding ->
+                ) { _ ->
                     val density = LocalDensity.current
                     val statusBarHeightPx = with(density) {
                         WindowInsets.statusBars.asPaddingValues().calculateTopPadding().toPx()
@@ -190,11 +188,51 @@ fun PixelSearchbarSettingsUI(
     var showPermissionSheet by remember { mutableStateOf(false) }
     val currentType = viewModel.pixelSearchbarType.value
 
-    val options = listOf("empty", "date")
+    val options = listOf("empty", "date", "widget")
     val labels = mapOf(
         "empty" to stringResource(R.string.pixel_searchbar_style_empty),
-        "date" to stringResource(R.string.pixel_searchbar_style_date)
+        "date" to stringResource(R.string.pixel_searchbar_style_date),
+        "widget" to stringResource(R.string.pixel_searchbar_style_widget)
     )
+
+    val awm = remember { AppWidgetManager.getInstance(context) }
+    val widgetHost = remember { AppWidgetHost(context, WidgetScraperService.HOST_ID) }
+
+    // Track the allocated ID so we can deallocate on cancel
+    var pendingWidgetId by remember { mutableStateOf(AppWidgetManager.INVALID_APPWIDGET_ID) }
+
+    // Single launcher — ACTION_APPWIDGET_PICK handles bind permission internally
+    val pickerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data ?: return@rememberLauncherForActivityResult
+            val widgetId = data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+            if (widgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                val info = awm.getAppWidgetInfo(widgetId)
+                val providerName = info?.provider?.flattenToString()
+                viewModel.setPixelSearchbarType("widget", context)
+                viewModel.setPixelSearchbarWidgetId(widgetId, providerName, context)
+                WidgetScraperService.start(context)
+            }
+        } else {
+            // Deallocate the ID we pre-allocated if user cancelled
+            if (pendingWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                widgetHost.deleteAppWidgetId(pendingWidgetId)
+                pendingWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
+            }
+        }
+    }
+
+    fun openWidgetPicker() {
+        val allocatedId = widgetHost.allocateAppWidgetId()
+        pendingWidgetId = allocatedId
+        val pickIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_PICK).apply {
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, allocatedId)
+        }
+        pickerLauncher.launch(pickIntent)
+    }
+
 
     Column(
         modifier = modifier
@@ -238,11 +276,154 @@ fun PixelSearchbarSettingsUI(
                         items = options,
                         selectedItem = currentType,
                         onItemSelected = { type ->
-                            viewModel.setPixelSearchbarType(type, context)
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            when {
+                                type == "widget" -> openWidgetPicker()
+                                currentType == "widget" -> {
+                                    WidgetScraperService.stop(context)
+                                    viewModel.setPixelSearchbarType(type, context)
+                                }
+                                else -> viewModel.setPixelSearchbarType(type, context)
+                            }
                         },
                         labelProvider = { labels[it] ?: it },
                         modifier = Modifier.fillMaxWidth()
                     )
+                }
+
+                // Widget mode controls
+                AnimatedVisibility(
+                    visible = currentType == "widget",
+                    enter = expandVertically(),
+                    exit = shrinkVertically(),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    val widgetProvider = viewModel.pixelSearchbarWidgetProvider.value
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        RoundedCardContainer(spacing = 2.dp) {
+                            ListItem(
+                                onClick = {
+                                    HapticUtil.performVirtualKeyHaptic(view)
+                                    openWidgetPicker()
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                leadingContent = {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.rounded_widgets_24),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                },
+                                trailingContent = {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.rounded_chevron_right_24),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                                    )
+                                },
+                                supportingContent = {
+                                    Text(
+                                        text = if (widgetProvider != null)
+                                            widgetProvider.substringAfterLast("/")
+                                        else
+                                            stringResource(R.string.pixel_searchbar_widget_none),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                },
+                                colors = ListItemDefaults.colors(
+                                    containerColor = MaterialTheme.colorScheme.surfaceBright
+                                )
+                            ) {
+                                Text(
+                                    text = if (widgetProvider != null)
+                                        stringResource(R.string.pixel_searchbar_widget_change)
+                                    else
+                                        stringResource(R.string.pixel_searchbar_widget_picker_title),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+
+                            AnimatedVisibility(
+                                visible = widgetProvider != null,
+                                enter = expandVertically(),
+                                exit = shrinkVertically()
+                            ) {
+                                ListItem(
+                                    onClick = {
+                                        HapticUtil.performVirtualKeyHaptic(view)
+                                        viewModel.clearPixelSearchbarWidget(context)
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    leadingContent = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.rounded_delete_24),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(24.dp),
+                                            tint = MaterialTheme.colorScheme.error
+                                        )
+                                    },
+                                    colors = ListItemDefaults.colors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                                    )
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.pixel_searchbar_widget_remove),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                }
+                            }
+                        }
+
+                        // Scraped text preview
+                        val line1 = viewModel.pixelSearchbarScrapedLine1.value
+                        val line2 = viewModel.pixelSearchbarScrapedLine2.value
+                        AnimatedVisibility(
+                            visible = widgetProvider != null && (line1.isNotEmpty() || line2.isNotEmpty()),
+                            enter = expandVertically(),
+                            exit = shrinkVertically()
+                        ) {
+                            RoundedCardContainer {
+                                ListItem(
+                                    onClick = {},
+                                    modifier = Modifier.fillMaxWidth(),
+                                    leadingContent = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.rounded_info_24),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(24.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                    },
+                                    supportingContent = if (line2.isNotEmpty()) {
+                                        {
+                                            Text(
+                                                text = line2,
+                                                style = MaterialTheme.typography.labelMedium,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                    } else null,
+                                    colors = ListItemDefaults.colors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                                    )
+                                ) {
+                                    Text(
+                                        text = line1.ifEmpty { "—" },
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
 
                 AnimatedVisibility(

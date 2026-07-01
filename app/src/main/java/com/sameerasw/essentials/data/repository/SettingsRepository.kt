@@ -246,6 +246,10 @@ class SettingsRepository(private val context: Context) {
         const val KEY_PIXEL_SEARCHBAR_TYPE = "pixel_searchbar_type"
         const val KEY_PIXEL_SEARCHBAR_DATE_FORMAT = "pixel_searchbar_date_format"
         const val KEY_PIXEL_SEARCHBAR_BACKGROUND_PILL = "pixel_searchbar_background_pill"
+        const val KEY_PIXEL_SEARCHBAR_WIDGET_ID = "pixel_searchbar_widget_id"
+        const val KEY_PIXEL_SEARCHBAR_WIDGET_PROVIDER = "pixel_searchbar_widget_provider"
+        const val KEY_PIXEL_SEARCHBAR_SCRAPED_LINE1 = "pixel_searchbar_scraped_line1"
+        const val KEY_PIXEL_SEARCHBAR_SCRAPED_LINE2 = "pixel_searchbar_scraped_line2"
 
         const val KEY_LOCK_SCREEN_CLOCK_WEIGHT = "lock_screen_clock_weight"
         const val KEY_LOCK_SCREEN_CLOCK_WIDTH = "lock_screen_clock_width"
@@ -904,6 +908,31 @@ class SettingsRepository(private val context: Context) {
 
     fun setPixelSearchbarBackgroundPill(enabled: Boolean) =
         putBoolean(KEY_PIXEL_SEARCHBAR_BACKGROUND_PILL, enabled)
+
+    fun getPixelSearchbarWidgetId(): Int =
+        prefs.getInt(KEY_PIXEL_SEARCHBAR_WIDGET_ID, android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID)
+
+    fun setPixelSearchbarWidgetId(id: Int) =
+        prefs.edit().putInt(KEY_PIXEL_SEARCHBAR_WIDGET_ID, id).apply()
+
+    fun getPixelSearchbarWidgetProvider(): String? =
+        prefs.getString(KEY_PIXEL_SEARCHBAR_WIDGET_PROVIDER, null)
+
+    fun setPixelSearchbarWidgetProvider(provider: String?) =
+        if (provider == null) prefs.edit().remove(KEY_PIXEL_SEARCHBAR_WIDGET_PROVIDER).apply()
+        else putString(KEY_PIXEL_SEARCHBAR_WIDGET_PROVIDER, provider)
+
+    fun getPixelSearchbarScrapedLine1(): String =
+        prefs.getString(KEY_PIXEL_SEARCHBAR_SCRAPED_LINE1, "") ?: ""
+
+    fun setPixelSearchbarScrapedLine1(text: String) =
+        putString(KEY_PIXEL_SEARCHBAR_SCRAPED_LINE1, text)
+
+    fun getPixelSearchbarScrapedLine2(): String =
+        prefs.getString(KEY_PIXEL_SEARCHBAR_SCRAPED_LINE2, "") ?: ""
+
+    fun setPixelSearchbarScrapedLine2(text: String) =
+        putString(KEY_PIXEL_SEARCHBAR_SCRAPED_LINE2, text)
 
     fun getEdgeLightingSweepSelectedShapes(): Set<String> {
         val defaultShapes = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.allShapesWithNames.map { it.first }.toSet()

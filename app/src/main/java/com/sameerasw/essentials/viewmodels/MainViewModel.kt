@@ -146,6 +146,10 @@ class MainViewModel : ViewModel() {
     val pixelSearchbarType = mutableStateOf("empty")
     val pixelSearchbarDateFormat = mutableStateOf("EEEE, MMMM d")
     val pixelSearchbarBackgroundPill = mutableStateOf(false)
+    val pixelSearchbarWidgetId = mutableIntStateOf(android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID)
+    val pixelSearchbarWidgetProvider = mutableStateOf<String?>(null)
+    val pixelSearchbarScrapedLine1 = mutableStateOf("")
+    val pixelSearchbarScrapedLine2 = mutableStateOf("")
     val lockScreenClockId = mutableStateOf<String?>(null)
     val lockScreenClockWeight = mutableIntStateOf(300)
     val lockScreenClockWidth = mutableIntStateOf(116)
@@ -851,6 +855,14 @@ class MainViewModel : ViewModel() {
             settingsRepository.getPixelSearchbarDateFormat()
         pixelSearchbarBackgroundPill.value =
             settingsRepository.getPixelSearchbarBackgroundPill()
+        pixelSearchbarWidgetId.intValue =
+            settingsRepository.getPixelSearchbarWidgetId()
+        pixelSearchbarWidgetProvider.value =
+            settingsRepository.getPixelSearchbarWidgetProvider()
+        pixelSearchbarScrapedLine1.value =
+            settingsRepository.getPixelSearchbarScrapedLine1()
+        pixelSearchbarScrapedLine2.value =
+            settingsRepository.getPixelSearchbarScrapedLine2()
         lockScreenClockId.value = readCurrentLockScreenClockId(context)
         lockScreenClockWeight.intValue = settingsRepository.getLockScreenClockWeight()
         lockScreenClockWidth.intValue = settingsRepository.getLockScreenClockWidth()
@@ -1882,6 +1894,31 @@ class MainViewModel : ViewModel() {
         } else if (RootUtils.isRootPermissionGranted()) {
             RootUtils.runCommand(forceStopCommand)
         }
+    }
+
+    fun setPixelSearchbarWidgetId(id: Int, provider: String?, context: Context) {
+        pixelSearchbarWidgetId.intValue = id
+        pixelSearchbarWidgetProvider.value = provider
+        settingsRepository.setPixelSearchbarWidgetId(id)
+        settingsRepository.setPixelSearchbarWidgetProvider(provider)
+        updatePixelSearchbarWidget(context)
+    }
+
+    fun clearPixelSearchbarWidget(context: Context) {
+        pixelSearchbarWidgetId.intValue = android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID
+        pixelSearchbarWidgetProvider.value = null
+        settingsRepository.setPixelSearchbarWidgetId(android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID)
+        settingsRepository.setPixelSearchbarWidgetProvider(null)
+        context.stopService(android.content.Intent(context, com.sameerasw.essentials.services.widgets.WidgetScraperService::class.java))
+        updatePixelSearchbarWidget(context)
+    }
+
+    fun updatePixelSearchbarScrapedText(line1: String, line2: String, context: Context) {
+        pixelSearchbarScrapedLine1.value = line1
+        pixelSearchbarScrapedLine2.value = line2
+        settingsRepository.setPixelSearchbarScrapedLine1(line1)
+        settingsRepository.setPixelSearchbarScrapedLine2(line2)
+        updatePixelSearchbarWidget(context)
     }
 
     fun updatePixelSearchbarWidget(context: Context) {
