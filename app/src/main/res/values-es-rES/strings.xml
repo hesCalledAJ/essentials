@@ -1518,5 +1518,5 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla s
     <string name="pixel_searchbar_widget_padding_v">Vertical padding</string>
     <string name="pixel_searchbar_tap_action_enabled">Custom tap action</string>
     <string name="pixel_searchbar_tap_action_enabled_desc">Use DIY tap action instead of widget\'s own</string>
-    <string name="pixel_searchbar_style_music">Music</string>
+    <string name="pixel_searchbar_style_music">Música</string>
 </resources>
