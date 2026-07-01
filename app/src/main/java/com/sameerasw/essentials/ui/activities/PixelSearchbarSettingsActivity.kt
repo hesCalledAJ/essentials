@@ -60,8 +60,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import com.sameerasw.essentials.domain.model.Feature
 import com.sameerasw.essentials.ui.components.sheets.FeatureHelpBottomSheet
+import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
 import android.content.Context
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
+import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.layout.navigationBars
@@ -183,6 +185,8 @@ fun PixelSearchbarSettingsUI(
 ) {
     val context = LocalContext.current
     val view = LocalView.current
+    val isEnabled = viewModel.isPixelSearchbarEnabled.value
+    var showPermissionSheet by remember { mutableStateOf(false) }
     val currentType = viewModel.pixelSearchbarType.value
 
     val options = listOf("empty", "date")
@@ -195,176 +199,154 @@ fun PixelSearchbarSettingsUI(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-
-        RoundedCardContainer(spacing = 0.dp) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surfaceBright),
-                verticalArrangement = Arrangement.spacedBy(0.dp)
-            ) {
-                ListItem(
-                    onClick = {},
-                    modifier = Modifier.fillMaxWidth(),
-                    leadingContent = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.rounded_home_24),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    contentPadding = PaddingValues(
-                        horizontal = 16.dp,
-                        vertical = 16.dp
-                    ),
-                    verticalAlignment = Alignment.CenterVertically,
-                    colors = ListItemDefaults.colors(
-                        containerColor = MaterialTheme.colorScheme.surfaceBright
-                    ),
-                    content = {
-                        Text(
-                            text = stringResource(R.string.feat_pixel_searchbar_title),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+        RoundedCardContainer {
+            IconToggleItem(
+                iconRes = R.drawable.rounded_search_24,
+                title = stringResource(R.string.feat_pixel_searchbar_title),
+                description = "Replace Pixel Launcher default searchbar",
+                isChecked = isEnabled,
+                onCheckedChange = { enabled ->
+                    if (viewModel.isWriteSecureSettingsEnabled.value || viewModel.isShizukuPermissionGranted.value || viewModel.isRootPermissionGranted.value) {
+                        viewModel.setPixelSearchbarEnabled(enabled, context)
+                    } else {
+                        showPermissionSheet = true
                     }
+                }
+            )
+        }
+
+        AnimatedVisibility(
+            visible = isEnabled,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.label_replace_with),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
-                ) {
-                    options.forEachIndexed { index, type ->
-                        val isChecked = currentType == type
-                        val label = labels[type] ?: type
+                RoundedCardContainer {
+                    SegmentedPicker(
+                        items = options,
+                        selectedItem = currentType,
+                        onItemSelected = { type ->
+                            viewModel.setPixelSearchbarType(type, context)
+                        },
+                        labelProvider = { labels[it] ?: it },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
 
-                        ToggleButton(
-                            checked = isChecked,
-                            onCheckedChange = {
-                                HapticUtil.performVirtualKeyHaptic(view)
-                                viewModel.setPixelSearchbarType(type, context)
-                            },
-                            modifier = Modifier
-                                .weight(1f)
-                                .semantics { role = Role.RadioButton },
-                            shapes = when {
-                                index == 0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
-                                index == options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
-                                else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                            },
-                        ) {
-                            Text(
-                                text = label,
-                                style = MaterialTheme.typography.labelLarge,
-                                fontWeight = if (isChecked) FontWeight.Bold else FontWeight.Normal,
-                                maxLines = 1
+                AnimatedVisibility(
+                    visible = currentType == "date",
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    val currentDateFormat = viewModel.pixelSearchbarDateFormat.value
+                    val dateFormats = listOf(
+                        "EEEE, MMMM d",
+                        "EEEE, MMM d",
+                        "EEE, MMM d",
+                        "EEEE, d MMMM",
+                        "d MMMM",
+                        "MMMM d",
+                        "EEE, d MMM",
+                        "yyyy-MM-dd",
+                        "dd/MM/yyyy"
+                    )
+                    val currentDate = remember { java.util.Date() }
+                    val googleSansFlexRound = remember { FontFamily(Font(R.font.google_sans_flex_round)) }
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 4.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+
+                        RoundedCardContainer {
+                            IconToggleItem(
+                                iconRes = R.drawable.rounded_rounded_corner_24,
+                                title = stringResource(R.string.pixel_searchbar_background_pill_title),
+                                description = stringResource(R.string.pixel_searchbar_background_pill_desc),
+                                isChecked = viewModel.pixelSearchbarBackgroundPill.value,
+                                onCheckedChange = { enabled ->
+                                    viewModel.setPixelSearchbarBackgroundPill(enabled, context)
+                                }
                             )
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Text(
+                            text = "Date Format",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        RoundedCardContainer(spacing = 2.dp) {
+                            dateFormats.forEach { format ->
+                                val isSelected = currentDateFormat == format
+                                val formattedDate = remember(format, currentDate) {
+                                    try {
+                                        java.text.SimpleDateFormat(format, java.util.Locale.getDefault()).format(currentDate)
+                                    } catch (e: Exception) {
+                                        format
+                                    }
+                                }
+
+                                ListItem(
+                                    onClick = {
+                                        HapticUtil.performVirtualKeyHaptic(view)
+                                        viewModel.setPixelSearchbarDateFormat(format, context)
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    leadingContent = {
+                                        RadioButton(
+                                            selected = isSelected,
+                                            onClick = {
+                                                HapticUtil.performVirtualKeyHaptic(view)
+                                                viewModel.setPixelSearchbarDateFormat(format, context)
+                                            }
+                                        )
+                                    },
+                                    colors = ListItemDefaults.colors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                                    )
+                                ) {
+                                    Text(
+                                        text = formattedDate,
+                                        style = MaterialTheme.typography.bodyLarge.copy(
+                                            fontFamily = googleSansFlexRound
+                                        ),
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+    }
 
-        AnimatedVisibility(
-            visible = currentType == "date",
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            val currentDateFormat = viewModel.pixelSearchbarDateFormat.value
-            val dateFormats = listOf(
-                "EEEE, MMMM d",
-                "EEEE, MMM d",
-                "EEE, MMM d",
-                "EEEE, d MMMM",
-                "d MMMM",
-                "MMMM d",
-                "EEE, d MMM",
-                "yyyy-MM-dd",
-                "dd/MM/yyyy"
+    if (showPermissionSheet) {
+        val permissionItem = remember(context, viewModel) {
+            com.sameerasw.essentials.utils.PermissionUIHelper.getPermissionItem("WRITE_SECURE_SETTINGS", context, viewModel)
+        }
+        if (permissionItem != null) {
+            PermissionsBottomSheet(
+                onDismissRequest = { showPermissionSheet = false },
+                featureTitle = "Pixel Searchbar",
+                permissions = listOf(permissionItem)
             )
-            val currentDate = remember { java.util.Date() }
-            val googleSansFlexRound = remember { FontFamily(Font(R.font.google_sans_flex_round)) }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = "Background Pill",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                RoundedCardContainer {
-                    IconToggleItem(
-                        iconRes = R.drawable.rounded_rounded_corner_24,
-                        title = stringResource(R.string.pixel_searchbar_background_pill_title),
-                        description = stringResource(R.string.pixel_searchbar_background_pill_desc),
-                        isChecked = viewModel.pixelSearchbarBackgroundPill.value,
-                        onCheckedChange = { enabled ->
-                            viewModel.setPixelSearchbarBackgroundPill(enabled, context)
-                        }
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    text = "Date Format",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                RoundedCardContainer(spacing = 2.dp) {
-                    dateFormats.forEach { format ->
-                        val isSelected = currentDateFormat == format
-                        val formattedDate = remember(format, currentDate) {
-                            try {
-                                java.text.SimpleDateFormat(format, java.util.Locale.getDefault()).format(currentDate)
-                            } catch (e: Exception) {
-                                format
-                            }
-                        }
-
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.surfaceBright)
-                                .clickable {
-                                    HapticUtil.performVirtualKeyHaptic(view)
-                                    viewModel.setPixelSearchbarDateFormat(format, context)
-                                }
-                                .padding(horizontal = 16.dp, vertical = 16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = isSelected,
-                                onClick = {
-                                    HapticUtil.performVirtualKeyHaptic(view)
-                                    viewModel.setPixelSearchbarDateFormat(format, context)
-                                }
-                            )
-                            Text(
-                                text = formattedDate,
-                                style = MaterialTheme.typography.bodyLarge.copy(
-                                    fontFamily = googleSansFlexRound
-                                ),
-                                modifier = Modifier.padding(start = 16.dp),
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }
