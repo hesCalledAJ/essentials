@@ -1601,4 +1601,8 @@
     <string name="pixel_searchbar_bind_permission_desc">Essentials needs permission to host widgets. Tap to grant.</string>
     <string name="pixel_searchbar_scraped_line1">Scraped title</string>
     <string name="pixel_searchbar_scraped_line2">Scraped subtitle</string>
+    <string name="pixel_searchbar_widget_padding_h">Horizontal padding</string>
+    <string name="pixel_searchbar_widget_padding_v">Vertical padding</string>
+    <string name="pixel_searchbar_tap_action_enabled">Custom tap action</string>
+    <string name="pixel_searchbar_tap_action_enabled_desc">Use DIY tap action instead of widget\'s own</string>
 </resources>

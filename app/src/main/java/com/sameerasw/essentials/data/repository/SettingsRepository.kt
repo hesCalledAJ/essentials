@@ -250,6 +250,10 @@ class SettingsRepository(private val context: Context) {
         const val KEY_PIXEL_SEARCHBAR_WIDGET_PROVIDER = "pixel_searchbar_widget_provider"
         const val KEY_PIXEL_SEARCHBAR_SCRAPED_LINE1 = "pixel_searchbar_scraped_line1"
         const val KEY_PIXEL_SEARCHBAR_SCRAPED_LINE2 = "pixel_searchbar_scraped_line2"
+        const val KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_H = "pixel_searchbar_widget_padding_h"
+        const val KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_V = "pixel_searchbar_widget_padding_v"
+        const val KEY_PIXEL_SEARCHBAR_TAP_ACTION_ENABLED = "pixel_searchbar_tap_action_enabled"
+        const val KEY_PIXEL_SEARCHBAR_WIDGET_REVISION = "pixel_searchbar_widget_revision"
 
         const val KEY_LOCK_SCREEN_CLOCK_WEIGHT = "lock_screen_clock_weight"
         const val KEY_LOCK_SCREEN_CLOCK_WIDTH = "lock_screen_clock_width"
@@ -933,6 +937,32 @@ class SettingsRepository(private val context: Context) {
 
     fun setPixelSearchbarScrapedLine2(text: String) =
         putString(KEY_PIXEL_SEARCHBAR_SCRAPED_LINE2, text)
+
+    fun getPixelSearchbarWidgetPaddingH(): Int =
+        prefs.getInt(KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_H, 0)
+
+    fun setPixelSearchbarWidgetPaddingH(value: Int) =
+        prefs.edit().putInt(KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_H, value).apply()
+
+    fun getPixelSearchbarWidgetPaddingV(): Int =
+        prefs.getInt(KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_V, 0)
+
+    fun setPixelSearchbarWidgetPaddingV(value: Int) =
+        prefs.edit().putInt(KEY_PIXEL_SEARCHBAR_WIDGET_PADDING_V, value).apply()
+
+    fun getPixelSearchbarTapActionEnabled(): Boolean =
+        prefs.getBoolean(KEY_PIXEL_SEARCHBAR_TAP_ACTION_ENABLED, true)
+
+    fun setPixelSearchbarTapActionEnabled(enabled: Boolean) =
+        putBoolean(KEY_PIXEL_SEARCHBAR_TAP_ACTION_ENABLED, enabled)
+
+    fun getPixelSearchbarWidgetRevision(): Int =
+        prefs.getInt(KEY_PIXEL_SEARCHBAR_WIDGET_REVISION, 0)
+
+    fun incrementPixelSearchbarWidgetRevision() {
+        val current = getPixelSearchbarWidgetRevision()
+        prefs.edit().putInt(KEY_PIXEL_SEARCHBAR_WIDGET_REVISION, current + 1).apply()
+    }
 
     fun getEdgeLightingSweepSelectedShapes(): Set<String> {
         val defaultShapes = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.allShapesWithNames.map { it.first }.toSet()

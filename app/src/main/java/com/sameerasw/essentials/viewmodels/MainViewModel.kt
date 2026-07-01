@@ -150,6 +150,9 @@ class MainViewModel : ViewModel() {
     val pixelSearchbarWidgetProvider = mutableStateOf<String?>(null)
     val pixelSearchbarScrapedLine1 = mutableStateOf("")
     val pixelSearchbarScrapedLine2 = mutableStateOf("")
+    val pixelSearchbarWidgetPaddingH = mutableIntStateOf(0)
+    val pixelSearchbarWidgetPaddingV = mutableIntStateOf(0)
+    val pixelSearchbarTapActionEnabled = mutableStateOf(true)
     val lockScreenClockId = mutableStateOf<String?>(null)
     val lockScreenClockWeight = mutableIntStateOf(300)
     val lockScreenClockWidth = mutableIntStateOf(116)
@@ -863,6 +866,12 @@ class MainViewModel : ViewModel() {
             settingsRepository.getPixelSearchbarScrapedLine1()
         pixelSearchbarScrapedLine2.value =
             settingsRepository.getPixelSearchbarScrapedLine2()
+        pixelSearchbarWidgetPaddingH.intValue =
+            settingsRepository.getPixelSearchbarWidgetPaddingH()
+        pixelSearchbarWidgetPaddingV.intValue =
+            settingsRepository.getPixelSearchbarWidgetPaddingV()
+        pixelSearchbarTapActionEnabled.value =
+            settingsRepository.getPixelSearchbarTapActionEnabled()
         lockScreenClockId.value = readCurrentLockScreenClockId(context)
         lockScreenClockWeight.intValue = settingsRepository.getLockScreenClockWeight()
         lockScreenClockWidth.intValue = settingsRepository.getLockScreenClockWidth()
@@ -1918,6 +1927,24 @@ class MainViewModel : ViewModel() {
         pixelSearchbarScrapedLine2.value = line2
         settingsRepository.setPixelSearchbarScrapedLine1(line1)
         settingsRepository.setPixelSearchbarScrapedLine2(line2)
+        updatePixelSearchbarWidget(context)
+    }
+
+    fun setPixelSearchbarWidgetPaddingH(value: Int, context: Context) {
+        pixelSearchbarWidgetPaddingH.intValue = value
+        settingsRepository.setPixelSearchbarWidgetPaddingH(value)
+        updatePixelSearchbarWidget(context)
+    }
+
+    fun setPixelSearchbarWidgetPaddingV(value: Int, context: Context) {
+        pixelSearchbarWidgetPaddingV.intValue = value
+        settingsRepository.setPixelSearchbarWidgetPaddingV(value)
+        updatePixelSearchbarWidget(context)
+    }
+
+    fun setPixelSearchbarTapActionEnabled(enabled: Boolean, context: Context) {
+        pixelSearchbarTapActionEnabled.value = enabled
+        settingsRepository.setPixelSearchbarTapActionEnabled(enabled)
         updatePixelSearchbarWidget(context)
     }
 

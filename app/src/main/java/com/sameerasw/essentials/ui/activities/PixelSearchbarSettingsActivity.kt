@@ -58,6 +58,9 @@ import com.sameerasw.essentials.services.widgets.WidgetScraperService
 import com.sameerasw.essentials.ui.components.EssentialsFloatingToolbar
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
+import com.sameerasw.essentials.ui.components.sliders.ConfigSliderItem
+import androidx.compose.material3.Switch
+
 import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
 import com.sameerasw.essentials.ui.components.sheets.FeatureHelpBottomSheet
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
@@ -382,46 +385,40 @@ fun PixelSearchbarSettingsUI(
                             }
                         }
 
-                        // Scraped text preview
-                        val line1 = viewModel.pixelSearchbarScrapedLine1.value
-                        val line2 = viewModel.pixelSearchbarScrapedLine2.value
-                        AnimatedVisibility(
-                            visible = widgetProvider != null && (line1.isNotEmpty() || line2.isNotEmpty()),
-                            enter = expandVertically(),
-                            exit = shrinkVertically()
-                        ) {
-                            RoundedCardContainer {
-                                ListItem(
-                                    onClick = {},
-                                    modifier = Modifier.fillMaxWidth(),
-                                    leadingContent = {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.rounded_info_24),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(24.dp),
-                                            tint = MaterialTheme.colorScheme.primary
-                                        )
-                                    },
-                                    supportingContent = if (line2.isNotEmpty()) {
-                                        {
-                                            Text(
-                                                text = line2,
-                                                style = MaterialTheme.typography.labelMedium,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                                            )
-                                        }
-                                    } else null,
-                                    colors = ListItemDefaults.colors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                        // Horizontal and Vertical Padding sliders
+                        RoundedCardContainer(spacing = 2.dp) {
+                            ConfigSliderItem(
+                                title = stringResource(R.string.pixel_searchbar_widget_padding_h),
+                                value = viewModel.pixelSearchbarWidgetPaddingH.intValue.toFloat(),
+                                onValueChange = {
+                                    viewModel.pixelSearchbarWidgetPaddingH.intValue = it.toInt()
+                                },
+                                onValueChangeFinished = {
+                                    viewModel.setPixelSearchbarWidgetPaddingH(
+                                        viewModel.pixelSearchbarWidgetPaddingH.intValue,
+                                        context
                                     )
-                                ) {
-                                    Text(
-                                        text = line1.ifEmpty { "—" },
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurface
+                                },
+                                valueRange = 0f..100f,
+                                increment = 4f,
+                                iconRes = R.drawable.rounded_rounded_corner_24
+                            )
+                            ConfigSliderItem(
+                                title = stringResource(R.string.pixel_searchbar_widget_padding_v),
+                                value = viewModel.pixelSearchbarWidgetPaddingV.intValue.toFloat(),
+                                onValueChange = {
+                                    viewModel.pixelSearchbarWidgetPaddingV.intValue = it.toInt()
+                                },
+                                onValueChangeFinished = {
+                                    viewModel.setPixelSearchbarWidgetPaddingV(
+                                        viewModel.pixelSearchbarWidgetPaddingV.intValue,
+                                        context
                                     )
-                                }
-                            }
+                                },
+                                valueRange = 0f..100f,
+                                increment = 4f,
+                                iconRes = R.drawable.rounded_rounded_corner_24
+                            )
                         }
                     }
                 }
@@ -526,13 +523,16 @@ fun PixelSearchbarSettingsUI(
                 )
 
                 RoundedCardContainer {
+                    val tapActionEnabled = viewModel.pixelSearchbarTapActionEnabled.value
                     ListItem(
                         onClick = {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            val intent = Intent(context, com.sameerasw.essentials.MainActivity::class.java).apply {
-                                putExtra("target_tab", com.sameerasw.essentials.domain.DIYTabs.DIY.name)
+                            if (tapActionEnabled) {
+                                HapticUtil.performVirtualKeyHaptic(view)
+                                val intent = Intent(context, com.sameerasw.essentials.MainActivity::class.java).apply {
+                                    putExtra("target_tab", com.sameerasw.essentials.domain.DIYTabs.DIY.name)
+                                }
+                                context.startActivity(intent)
                             }
-                            context.startActivity(intent)
                         },
                         modifier = Modifier.fillMaxWidth(),
                         leadingContent = {
@@ -540,22 +540,23 @@ fun PixelSearchbarSettingsUI(
                                 painter = painterResource(id = R.drawable.rounded_rocket_launch_24),
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp),
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = if (tapActionEnabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
                             )
                         },
                         trailingContent = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.rounded_chevron_right_24),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                            Switch(
+                                checked = tapActionEnabled,
+                                onCheckedChange = { enabled ->
+                                    HapticUtil.performVirtualKeyHaptic(view)
+                                    viewModel.setPixelSearchbarTapActionEnabled(enabled, context)
+                                }
                             )
                         },
                         supportingContent = {
                             Text(
-                                text = stringResource(R.string.pixel_searchbar_tap_action_desc),
+                                text = stringResource(R.string.pixel_searchbar_tap_action_enabled_desc),
                                 style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = if (tapActionEnabled) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
                             )
                         },
                         colors = ListItemDefaults.colors(
@@ -563,9 +564,9 @@ fun PixelSearchbarSettingsUI(
                         )
                     ) {
                         Text(
-                            text = stringResource(R.string.pixel_searchbar_tap_action_title),
+                            text = stringResource(R.string.pixel_searchbar_tap_action_enabled),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = if (tapActionEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                         )
                     }
                 }
