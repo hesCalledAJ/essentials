@@ -22,6 +22,8 @@ import com.sameerasw.essentials.data.repository.SettingsRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.glance.action.clickable
+import androidx.glance.action.actionStartActivity
 
 class PixelSearchbarWidget : GlanceAppWidget() {
     override val sizeMode = androidx.glance.appwidget.SizeMode.Exact
@@ -39,6 +41,7 @@ class PixelSearchbarWidget : GlanceAppWidget() {
                             modifier = GlanceModifier
                                 .fillMaxSize()
                                 .background(android.graphics.Color.TRANSPARENT)
+                                .clickable(actionStartActivity(com.sameerasw.essentials.ui.activities.PixelSearchbarTapActivity::class.java))
                         ) {}
                     }
                     else -> { // Default / "date"
@@ -49,7 +52,8 @@ class PixelSearchbarWidget : GlanceAppWidget() {
                             modifier = GlanceModifier
                                 .fillMaxSize()
                                 .background(android.graphics.Color.TRANSPARENT)
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.dp)
+                                .clickable(actionStartActivity(com.sameerasw.essentials.ui.activities.PixelSearchbarTapActivity::class.java)),
                             contentAlignment = Alignment.Center
                         ) {
                             if (hasPill) {

@@ -215,6 +215,16 @@
             android:excludeFromRecents="true"
             android:taskAffinity="com.sameerasw.essentials.action" />
 
+        <activity
+            android:name=".ui.activities.PixelSearchbarTapActivity"
+            android:exported="true"
+            android:icon="@drawable/rounded_search_24"
+            android:label="@string/feat_pixel_searchbar_title"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.sameerasw.essentials.pixelsearchbar" />
+
         <activity-alias
             android:name=".ActionShortcutLauncher"
             android:targetActivity=".ui.activities.ActionShortcutActivity"

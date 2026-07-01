@@ -62,6 +62,7 @@ import com.sameerasw.essentials.domain.model.Feature
 import com.sameerasw.essentials.ui.components.sheets.FeatureHelpBottomSheet
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
 import android.content.Context
+import android.content.Intent
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
 import androidx.compose.material3.Scaffold
@@ -330,6 +331,51 @@ fun PixelSearchbarSettingsUI(
                                     )
                                 }
                             }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "Tap Action",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                RoundedCardContainer {
+                    ListItem(
+                        onClick = {
+                            val intent = Intent(context, com.sameerasw.essentials.MainActivity::class.java).apply {
+                                putExtra("target_tab", com.sameerasw.essentials.domain.DIYTabs.DIY.name)
+                            }
+                            context.startActivity(intent)
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.rounded_rocket_launch_24),
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        colors = ListItemDefaults.colors(
+                            containerColor = MaterialTheme.colorScheme.surfaceBright
+                        )
+                    ) {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.pixel_searchbar_tap_action_title),
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = stringResource(R.string.pixel_searchbar_tap_action_desc),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                     }
                 }

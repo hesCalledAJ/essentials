@@ -266,6 +266,21 @@ class MainActivity : AppCompatActivity() {
                             initialPage
                         )
                     }
+
+                    LaunchedEffect(intent) {
+                        intent?.getStringExtra("target_tab")?.let { tabName ->
+                            try {
+                                val tab = DIYTabs.valueOf(tabName)
+                                val index = tabs.indexOf(tab)
+                                if (index != -1) {
+                                    currentPage = index
+                                    intent.removeExtra("target_tab")
+                                }
+                            } catch (e: Exception) {
+                                // Ignore
+                            }
+                        }
+                    }
                     val backProgress = remember { Animatable(0f) }
                     val scope = rememberCoroutineScope()
 
