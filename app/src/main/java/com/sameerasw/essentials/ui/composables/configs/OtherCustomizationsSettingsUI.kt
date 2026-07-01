@@ -256,30 +256,7 @@ fun OtherCustomizationsSettingsUI(
                 modifier = Modifier.highlight(highlightSetting == "disable_rotation_suggestion_toggle")
             )
 
-            IconToggleItem(
-                title = stringResource(R.string.feat_pixel_searchbar_title),
-                description = stringResource(R.string.feat_pixel_searchbar_desc),
-                isChecked = viewModel.isPixelSearchbarEnabled.value,
-                onCheckedChange = { enabled ->
-                    if (viewModel.isWriteSecureSettingsEnabled.value || viewModel.isShizukuPermissionGranted.value || viewModel.isRootPermissionGranted.value) {
-                        viewModel.setPixelSearchbarEnabled(enabled, context)
-                    } else {
-                        requestingPermissionFor = PermissionModule.PIXEL_SEARCHBAR
-                    }
-                },
-                onClick = {
-                    val intent = Intent(context, PixelSearchbarSettingsActivity::class.java)
-                    context.startActivity(intent)
-                },
-                enabled = true,
-                onDisabledClick = {
-                    if (!viewModel.isWriteSecureSettingsEnabled.value && !viewModel.isShizukuPermissionGranted.value && !viewModel.isRootPermissionGranted.value) {
-                        requestingPermissionFor = PermissionModule.PIXEL_SEARCHBAR
-                    }
-                },
-                iconRes = R.drawable.rounded_search_24,
-                modifier = Modifier.highlight(highlightSetting == "pixel_searchbar_toggle")
-            )
+
 
             AnimatedVisibility(
                 visible = viewModel.isCircleToSearchGestureEnabled.value,
