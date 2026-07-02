@@ -1519,4 +1519,6 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla s
     <string name="pixel_searchbar_tap_action_enabled">Acción personalizada al tocar</string>
     <string name="pixel_searchbar_tap_action_enabled_desc">Usar la acción de tocar DIY en lugar de la propia del widget</string>
     <string name="pixel_searchbar_style_music">Música</string>
+    <string name="action_restart_shizuku">Restart Shizuku</string>
+    <string name="toast_enter_shizuku_token">Please enter Shizuku auth token in settings first</string>
 </resources>
