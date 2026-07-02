@@ -143,6 +143,15 @@ object DeviceInfoSyncManager {
         )
             ?: android.os.Build.MODEL
 
+        val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
+        val travelActive = prefs.getBoolean("travel_active", false)
+        val travelName = prefs.getString("travel_name", "") ?: ""
+        val travelProgress = prefs.getFloat("travel_progress", 0f)
+        val travelRemainingTime = prefs.getString("travel_remaining_time", "") ?: ""
+        val travelIconName = prefs.getString("travel_icon_name", "") ?: ""
+        val travelIsPaused = prefs.getBoolean("travel_is_paused", false)
+        val travelArrived = prefs.getBoolean("travel_arrived", false)
+
         val dataMap = putDataMapReq.dataMap
         dataMap.putInt("battery_level", batteryPct)
         dataMap.putBoolean("is_charging", isCharging)
@@ -152,6 +161,15 @@ object DeviceInfoSyncManager {
         dataMap.putBoolean("flashlight_intensity_supported", isIntensitySupported)
         dataMap.putInt("ringer_mode", ringerMode)
         dataMap.putString("device_name", deviceName)
+        
+        dataMap.putBoolean("travel_active", travelActive)
+        dataMap.putString("travel_name", travelName)
+        dataMap.putFloat("travel_progress", travelProgress)
+        dataMap.putString("travel_remaining_time", travelRemainingTime)
+        dataMap.putString("travel_icon_name", travelIconName)
+        dataMap.putBoolean("travel_is_paused", travelIsPaused)
+        dataMap.putBoolean("travel_arrived", travelArrived)
+
         dataMap.putLong("timestamp", System.currentTimeMillis())
 
         val putDataReq = putDataMapReq.asPutDataRequest()
