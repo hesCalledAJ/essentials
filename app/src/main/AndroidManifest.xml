@@ -931,6 +931,14 @@
         </receiver>
 
         <receiver
+            android:name=".services.receivers.ShizukuActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.sameerasw.essentials.ACTION_RESTART_SHIZUKU" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
             android:name=".services.automation.receivers.TimeAutomationReceiver"
             android:exported="false">
             <intent-filter>
