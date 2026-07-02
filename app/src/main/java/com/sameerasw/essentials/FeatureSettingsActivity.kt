@@ -86,6 +86,7 @@ import com.sameerasw.essentials.ui.composables.configs.WatchSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.WatchControlsSettingsUI
 import com.sameerasw.essentials.ui.modifiers.BlurDirection
 import com.sameerasw.essentials.ui.modifiers.progressiveBlur
+import com.sameerasw.essentials.ui.modifiers.highlight
 import com.sameerasw.essentials.ui.theme.EssentialsTheme
 import com.sameerasw.essentials.utils.BiometricSecurityHelper
 import com.sameerasw.essentials.utils.HapticUtil
@@ -548,6 +549,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                         }
 
                                         FeatureCard(
+                                            modifier = Modifier.highlight(highlightSetting == child.id),
                                             title = child.title,
                                             description = child.description,
                                             iconRes = child.iconRes,

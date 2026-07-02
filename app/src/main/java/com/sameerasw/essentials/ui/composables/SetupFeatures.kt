@@ -1333,6 +1333,8 @@ private fun RecentSearchesSection(
                         viewModel.addRecentSearch(result)
                         val feature = allFeatures.find { it.id == result.featureKey }
                         if (feature != null) {
+                            val targetFeatureKey = feature.parentFeatureId ?: feature.id
+                            val highlightKey = result.targetSettingHighlightKey ?: (if (feature.parentFeatureId != null) feature.id else null)
                             BiometricSecurityHelper.runWithAuth(
                                 activity = context as FragmentActivity,
                                 feature = feature,
@@ -1342,8 +1344,8 @@ private fun RecentSearchesSection(
                                             context,
                                             FeatureSettingsActivity::class.java
                                         ).apply {
-                                            putExtra("feature", result.featureKey)
-                                            result.targetSettingHighlightKey?.let {
+                                            putExtra("feature", targetFeatureKey)
+                                            highlightKey?.let {
                                                 putExtra("highlight_setting", it)
                                             }
                                         }
@@ -1395,6 +1397,8 @@ private fun SearchResultsSection(
                         viewModel.addRecentSearch(result)
                         val feature = allFeatures.find { it.id == result.featureKey }
                         if (feature != null) {
+                            val targetFeatureKey = feature.parentFeatureId ?: feature.id
+                            val highlightKey = result.targetSettingHighlightKey ?: (if (feature.parentFeatureId != null) feature.id else null)
                             BiometricSecurityHelper.runWithAuth(
                                 activity = context as FragmentActivity,
                                 feature = feature,
@@ -1404,8 +1408,8 @@ private fun SearchResultsSection(
                                             context,
                                             FeatureSettingsActivity::class.java
                                         ).apply {
-                                            putExtra("feature", result.featureKey)
-                                            result.targetSettingHighlightKey?.let {
+                                            putExtra("feature", targetFeatureKey)
+                                            highlightKey?.let {
                                                 putExtra("highlight_setting", it)
                                             }
                                         }
