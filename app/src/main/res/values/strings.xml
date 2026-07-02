@@ -649,6 +649,8 @@
     <string name="perm_action_enable">Enable in Settings</string>
     <string name="perm_action_how_to">How to grant</string>
     <string name="perm_action_granted">Granted</string>
+    <string name="perm_action_grant_shizuku">Grant using Shizuku</string>
+    <string name="perm_write_secure_instructions">This permission can be granted either via a PC using ADB. Copy the ADB command and run on the shell.\n\nOr you can easily grant it using Shizuku from the below button.\n\nThis permission only needs to be granted once.</string>
     <string name="perm_battery_optimization_title">Battery Optimization</string>
     <string name="perm_battery_optimization_desc">Ensure the service is not killed by the system to save power.</string>
 
