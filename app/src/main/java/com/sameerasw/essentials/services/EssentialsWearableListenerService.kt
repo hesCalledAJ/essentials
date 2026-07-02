@@ -3,6 +3,7 @@ package com.sameerasw.essentials.services
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
 
+import android.content.Context
 import androidx.core.content.edit
 
 class EssentialsWearableListenerService : WearableListenerService() {
@@ -150,6 +151,33 @@ class EssentialsWearableListenerService : WearableListenerService() {
                     prefs.edit(commit = true) {
                         putBoolean("watch_adb_wifi_enabled", adbWifiEnabled)
                         putBoolean("watch_write_secure_settings_granted", secureSettingsGranted)
+                    }
+                }
+            }
+
+            "/set_sync_sound_mode" -> {
+                val data = messageEvent.data
+                if (data != null && data.isNotEmpty()) {
+                    val enabled = data[0].toInt() == 1
+                    val prefs = getSharedPreferences("essentials_prefs", MODE_PRIVATE)
+                    prefs.edit(commit = true) {
+                        putBoolean("watch_sync_sound_mode_enabled", enabled)
+                    }
+                    // Immediately push device info to let watch know
+                    DeviceInfoSyncManager.forceSync(this)
+                }
+            }
+
+            "/set_phone_ringer_mode" -> {
+                val prefs = getSharedPreferences("essentials_prefs", MODE_PRIVATE)
+                val isSyncEnabled = prefs.getBoolean("watch_sync_sound_mode_enabled", false)
+                if (isSyncEnabled) {
+                    val ringerMode = messageEvent.data?.firstOrNull()?.toInt() ?: 2
+                    val audioManager = getSystemService(Context.AUDIO_SERVICE) as? android.media.AudioManager
+                    try {
+                        audioManager?.ringerMode = ringerMode
+                    } catch (e: Exception) {
+                        // ignore permission issue
                     }
                 }
             }
