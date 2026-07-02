@@ -1271,6 +1271,10 @@
     <string name="watch_help_title">Installa sull\'orologio</string>
     <string name="watch_help_description">Per utilizzare le funzionalità dell\'orologio, devi installare l\'app complementare Essentials sul tuo orologio Wear OS. Tocca il pulsante qui sotto per aprire il Play Store direttamente sul tuo orologio.</string>
     <string name="watch_help_open_play_store">Apri sull\'orologio</string>
+    <string name="feat_watch_controls_title">Customize</string>
+    <string name="feat_watch_controls_desc">Customize WearOS app controls</string>
+    <string name="watch_controls_long_press_hint">Long press to enable or disable buttons</string>
+    <string name="watch_controls_reorder_title">Reorder watch controls</string>
     <string name="cat_interaction">Interazione</string>
     <string name="cat_interface">Interfaccia</string>
     <string name="cat_display">Schermo</string>
