@@ -137,6 +137,33 @@ fun WallpaperScreen(
 
     val pullRefreshState = rememberPullToRefreshState()
 
+    var lastSwipeHapticBucket by remember { mutableIntStateOf(0) }
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPageOffsetFraction }
+            .collect { offset ->
+                val fraction = kotlin.math.abs(offset)
+                val currentBucket = (fraction * 10).toInt()
+                if (currentBucket != lastSwipeHapticBucket) {
+                    if (fraction > 0f) {
+                        HapticUtil.performSliderHaptic(view)
+                    }
+                    lastSwipeHapticBucket = currentBucket
+                }
+            }
+    }
+
+    LaunchedEffect(pagerState) {
+        var isFirst = true
+        snapshotFlow { pagerState.currentPage }
+            .collect {
+                if (isFirst) {
+                    isFirst = false
+                } else {
+                    HapticUtil.performHeavyHaptic(view)
+                }
+            }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
