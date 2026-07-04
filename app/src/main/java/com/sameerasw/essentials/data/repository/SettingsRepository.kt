@@ -1097,14 +1097,18 @@ class SettingsRepository(private val context: Context) {
     fun saveLiveWallpaperPlaybackTrigger(trigger: String) =
         liveWallpaperPrefs.edit().putString(KEY_LIVE_WALLPAPER_PLAYBACK_TRIGGER, trigger).apply()
 
-    fun getLiveWallpaperCustomVideos(): List<String> =
-        liveWallpaperPrefs.getString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, "")?.split(",")
-            ?.filter { it.isNotEmpty() }
-            ?: emptyList()
+    fun getLiveWallpaperCustomVideos(): List<String> {
+        val stored = liveWallpaperPrefs.getString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, "") ?: ""
+        val delimiter = if (!stored.contains("\n") && stored.contains(",")) "," else "\n"
+        return stored.split(delimiter)
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .distinct()
+    }
 
     fun saveLiveWallpaperCustomVideos(videos: List<String>) =
         liveWallpaperPrefs.edit()
-            .putString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, videos.joinToString(",")).apply()
+            .putString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, videos.filter { it.isNotEmpty() }.distinct().joinToString("\n")).apply()
 
     fun addLiveWallpaperCustomVideo(uri: String) {
         val current = getLiveWallpaperCustomVideos().toMutableList()
@@ -1118,17 +1122,18 @@ class SettingsRepository(private val context: Context) {
     fun getLiveWallpaperAvailableVideos(): List<String> {
         val raws = com.sameerasw.essentials.R.raw::class.java.fields.mapNotNull { field ->
             try {
-                if (field.name == "keep") null else field.name
+                if (field.name.startsWith("loop_")) field.name else null
             } catch (e: Exception) {
                 null
             }
         }
-        return raws + getLiveWallpaperCustomVideos()
+        return (raws + getLiveWallpaperCustomVideos()).filter { it.isNotBlank() }.distinct()
     }
 
     fun removeLiveWallpaperCustomVideo(videoUri: String) {
         val current = getLiveWallpaperCustomVideos().toMutableList()
-        if (current.remove(videoUri)) {
+        val removed = current.removeAll { it == videoUri || it.isBlank() }
+        if (removed) {
             saveLiveWallpaperCustomVideos(current)
             // If the removed video was selected, revert to default
             if (getLiveWallpaperSelectedVideo() == videoUri) {

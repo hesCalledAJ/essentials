@@ -354,7 +354,7 @@ fun WallpaperScreen(
                                     selectedVideo = video
                                     repository.saveLiveWallpaperSelectedVideo(video)
                                 },
-                                onRemove = if (video.startsWith("content://")) {
+                                onRemove = if (context.resources.getIdentifier(video, "raw", context.packageName) == 0) {
                                     {
                                         repository.removeLiveWallpaperCustomVideo(video)
                                         availableVideos = repository.getLiveWallpaperAvailableVideos()
@@ -448,6 +448,32 @@ fun WallpaperScreen(
                                     contentPadding = PaddingValues(0.dp),
                                     modifier = Modifier.fillMaxWidth()
                                 )
+
+                                if (repository.getLiveWallpaperCustomVideos().isNotEmpty()) {
+                                    Button(
+                                        onClick = {
+                                            HapticUtil.performHeavyHaptic(view)
+                                            repository.saveLiveWallpaperCustomVideos(emptyList())
+                                            availableVideos = repository.getLiveWallpaperAvailableVideos()
+                                            selectedVideo = repository.getLiveWallpaperSelectedVideo()
+                                        },
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = MaterialTheme.colorScheme.errorContainer,
+                                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                                        ),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(top = 4.dp)
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.rounded_delete_24),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(text = stringResource(R.string.label_clear_custom_videos))
+                                    }
+                                }
                             }
                         }
                     }
@@ -726,6 +752,9 @@ fun ThumbnailItem(
                         retriever.getFrameAtTime(0)
                     }
                 } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        onRemove?.invoke()
+                    }
                     null
                 }
             }
