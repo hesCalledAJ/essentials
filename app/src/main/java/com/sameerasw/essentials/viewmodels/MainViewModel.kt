@@ -1513,6 +1513,7 @@ class MainViewModel : ViewModel() {
         settingsRepository.savePinnedFeatures(current)
 
         appContext?.let { context ->
+            com.sameerasw.essentials.utils.ShortcutUtil.updateLauncherDynamicShortcuts(context)
             val intent = Intent("com.sameerasw.essentials.action.FAVORITES_WIDGET_UPDATE").apply {
                 setPackage(context.packageName)
             }
