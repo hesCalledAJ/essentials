@@ -72,7 +72,7 @@ fun FlashlightSettingsUI(
                 onCheckedChange = { viewModel.setFlashlightPocketTurnOffEnabled(it, context) }
             )
             IconToggleItem(
-                iconRes = R.drawable.rounded_snowflake_24,
+                iconRes = R.drawable.rounded_thermometer_alert_24,
                 title = stringResource(R.string.flashlight_overheat_title),
                 description = stringResource(R.string.flashlight_overheat_desc),
                 isChecked = viewModel.isFlashlightOverheatEnabled.value,
