@@ -349,7 +349,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="permission_read_phone_state_desc">Necesario para detectar el tipo de red para la función de Datos inteligentes</string>
     <string name="permission_read_phone_state_desc_call_vibrations">Requerido para detectar cambios en el estado de las llamadas para activar la retroalimentación háptica.</string>
     <string name="settings_section_smart_visibility">Visibilidad Inteligente</string>
-    <string name="smart_wifi_title">WiFi Inteligente</string>
+    <string name="smart_wifi_title">Wifi inteligente</string>
     <string name="smart_wifi_desc">Ocultar datos móviles cuando el WiFi está conectado</string>
     <string name="smart_data_desc">Ocultar datos móviles en ciertos modos</string>
     <string name="action_reset_all_icons">Restablecer todos los iconos</string>
@@ -396,6 +396,13 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_no_results">No hay resultados para \"%1$s\"</string>
     <string name="search_results_title">Resultados de la búsqueda</string>
     <string name="requires_following_permissions">%1$s requiere los siguientes permisos</string>
+    <string name="setting_enable_unsupported_features_title">Activar funciones no compatibles</string>
+    <string name="setting_enable_unsupported_features_desc">Mostrar funciones específicas del fabricante o redundantes que están ocultas de forma predeterminada.</string>
+    <string name="unsupported_features_warning_title">¿Activar funciones no compatibles?</string>
+    <string name="unsupported_features_warning_desc">Estas funciones pueden no funcionar en todos los dispositivos y podrían requerir permisos adicionales o acceso root.</string>
+    <string name="unsupported_features_confirm">Activar de todos modos</string>
+    <string name="unsupported_features_cancel">Cancelar</string>
+    <string name="disabled_on_this_device">Desactivado en este dispositivo</string>
     <!-- Features -->
     <string name="feat_screen_off_widget_title">Widget de pantalla apagada</string>
     <string name="feat_screen_off_widget_desc">Widget invisible para apagar la pantalla</string>
@@ -463,7 +470,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="feat_watermark_title">Marca de agua</string>
     <string name="feat_watermark_desc">Añadir datos EXIF ​​y logotipos a las fotos</string>
     <string name="feat_daily_wallpaper_title">Fondo de pantalla</string>
-    <string name="feat_daily_wallpaper_desc">Fondos de pantalla animados y seleccionados diariamente</string>
+    <string name="feat_daily_wallpaper_desc">Daily curated handpicked wallpaper</string>
     <string name="label_wallpaper_apply">Aplicar fondo de pantalla</string>
     <string name="label_wallpaper_by">Foto de</string>
     <string name="label_wallpaper_applied">Fondo de pantalla aplicado correctamente</string>
@@ -532,7 +539,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <!-- Search Settings -->
     <string name="search_haptic_title">Vibración háptica del widget</string>
     <string name="search_haptic_desc">Elige la respuesta háptica para los toques en el widget</string>
-    <string name="search_smart_wifi_title">WiFi inteligente</string>
+    <string name="search_smart_wifi_title">Wifi inteligente</string>
     <string name="search_smart_wifi_desc">Ocultar los datos móviles cuando haya Wi‑Fi conectado</string>
     <string name="search_smart_data_title">Datos inteligentes</string>
     <string name="search_smart_data_desc">Ocultar los datos móviles en ciertos modos</string>
@@ -954,7 +961,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla s
         <item>bolsillo</item>
         <item>proximidad</item>
         <item>sensor</item>
-        <item>torch</item>
+        <item>linterna</item>
         <item>auto</item>
     </string-array>
     <string-array name="keywords_qs_stay_awake">
@@ -1564,9 +1571,9 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla s
     <string name="pocket_mode_active">Modo bolsillo activo</string>
     <string name="pocket_mode_dismiss_hint">Pulsa cualquier tecla de volumen para descartar</string>
     <string name="pocket_mode_warning">Advertencia: En algunos dispositivos que carecen de ciertos sensores, activar el Modo bolsillo puede impedir el modo de suspensión profunda y provocar un mayor consumo de batería</string>
-    <string name="pocket_mode_exclude_apps_title">Exclude apps</string>
-    <string name="pocket_mode_exclude_apps_desc">Choose apps where Pocket Mode should not trigger. Pocket mode will not work when streaming or gaming by default</string>
-    <string name="pocket_mode_trigger_delay_title">Trigger delay</string>
-    <string name="pocket_mode_lock_screen_only_title">Lock screen only</string>
-    <string name="pocket_mode_lock_screen_only_desc">Only trigger pocket mode when the device is locked</string>
+    <string name="pocket_mode_exclude_apps_title">Excluir aplicaciones</string>
+    <string name="pocket_mode_exclude_apps_desc">Elige las aplicaciones en las que el Modo bolsillo no debería activarse. El Modo bolsillo no funcionará al reproducir contenido en streaming o al jugar, de forma predeterminada</string>
+    <string name="pocket_mode_trigger_delay_title">Retardo de activación</string>
+    <string name="pocket_mode_lock_screen_only_title">Solo en la pantalla de bloqueo</string>
+    <string name="pocket_mode_lock_screen_only_desc">Activar el Modo bolsillo solo cuando el dispositivo esté bloqueado</string>
 </resources>

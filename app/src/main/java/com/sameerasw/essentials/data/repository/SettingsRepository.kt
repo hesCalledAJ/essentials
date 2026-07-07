@@ -725,9 +725,11 @@ class SettingsRepository(private val context: Context) {
 
                 p.all.forEach { (key, value) ->
                     if (key == "freeze_auto_excluded_apps" || key.endsWith("_selected_apps")) {
-                    } else if (key.startsWith("mac_battery_") || key == "airsync_mac_connected" ||
-                        key == KEY_SNOOZE_DISCOVERED_CHANNELS || key == KEY_MAPS_DISCOVERED_CHANNELS ||
-                        key == KEY_SHUT_UP_ORIGINAL_SETTINGS
+                    }
+                    if (key == KEY_GITHUB_ACCESS_TOKEN || key == KEY_GITHUB_WORKFLOW_TOKEN ||
+                        key == KEY_SHIZUKU_AUTH_TOKEN || key.startsWith("mac_battery_") ||
+                        key == "airsync_mac_connected" || key == KEY_SNOOZE_DISCOVERED_CHANNELS ||
+                        key == KEY_MAPS_DISCOVERED_CHANNELS || key == KEY_SHUT_UP_ORIGINAL_SETTINGS
                     ) {
                         return@forEach
                     }
@@ -773,9 +775,52 @@ class SettingsRepository(private val context: Context) {
 
             allConfigs.forEach { (fileName, prefWrapper) ->
                 val p = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+                
+                // Preserve sensitive or volatile local state not present in backups
+                val preservedValues = mutableMapOf<String, Any?>()
+                val keysToPreserve = listOf(
+                    KEY_GITHUB_ACCESS_TOKEN,
+                    KEY_GITHUB_WORKFLOW_TOKEN,
+                    KEY_SHIZUKU_AUTH_TOKEN,
+                    "airsync_mac_connected",
+                    KEY_SNOOZE_DISCOVERED_CHANNELS,
+                    KEY_MAPS_DISCOVERED_CHANNELS,
+                    KEY_SHUT_UP_ORIGINAL_SETTINGS
+                )
+                val macBatteryKeys = p.all.keys.filter { it.startsWith("mac_battery_") }
+                (keysToPreserve + macBatteryKeys).forEach { key ->
+                    if (p.contains(key)) {
+                        preservedValues[key] = p.all[key]
+                    }
+                }
+
                 p.edit().apply {
                     clear()
+                    
+                    // Restore preserved values
+                    preservedValues.forEach { (key, value) ->
+                        if (value != null) {
+                            when (value) {
+                                is Boolean -> putBoolean(key, value)
+                                is Int -> putInt(key, value)
+                                is Long -> putLong(key, value)
+                                is Float -> putFloat(key, value)
+                                is String -> putString(key, value)
+                                is Set<*> -> {
+                                    @Suppress("UNCHECKED_CAST")
+                                    putStringSet(key, value as Set<String>)
+                                }
+                            }
+                        }
+                    }
+
                     prefWrapper.forEach { (key, item) ->
+                        // Do not import sensitive keys from the file even if they exist there
+                        if (key == KEY_GITHUB_ACCESS_TOKEN || key == KEY_GITHUB_WORKFLOW_TOKEN ||
+                            key == KEY_SHIZUKU_AUTH_TOKEN
+                        ) {
+                            return@forEach
+                        }
                         val itemType = item["type"] as? String
                         val itemValue = item["value"]
 

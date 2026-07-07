@@ -5,8 +5,8 @@
     <string name="shut_up_attempt_shizuku_restart">Attempt Shizuku restart</string>
     <string name="shut_up_shizuku_restart_warning_title">Shizuku Restart Warning</string>
     <string name="shut_up_shizuku_restart_warning_message">Since wireless debugging was toggled, Shizuku services might not have started automatically causing freezing to not function. Consider turning on attempt shizuku restart as well</string>
-    <string name="shut_up_restore_delay_title">Restoration Delay</string>
-    <string name="shut_up_restore_delay_desc">Wait time before restoring settings after exiting a Shut-Up! app</string>
+    <string name="shut_up_restore_delay_title">設定の復元の遅延</string>
+    <string name="shut_up_restore_delay_desc">「静かに！」アプリを終了した後、設定が復元されるまでの待機時間</string>
     <string name="accessibility_service_description"><b>Essentials アクセシビリティサービス</b>\n\nこのサービスは、以下の高度な機能に必要です。\n\n<b>・物理ボタンの再マッピング：</b>\n画面がオフの場合でも音量ボタンの押下を検出し、懐中電灯などのアクションを実行します。\n\n<b>・アプリごとの設定：</b>\n現在アクティブなアプリを監視し、ダイナミックナイトモード、通知ライトの色、アプリロックの特定のプロファイルを適用します。\n\n<b>・画面制御：</b>\nアプリが画面をロック（ダブルタップやウィジェット経由など）し、画面の状態の変化を検出できるようにします。\n\n<b>・セキュリティ：</b>\nデバイスがロックされているときにウィンドウの内容を検出することで、不正な変更を防ぎます。\n\n<small>入力テキストや機密性の高いユーザーデータは収集または送信されません。</small></string>
     <string name="freeze_activity_title">アプリフリーズ</string>
     <string name="freeze_activity_subtitle">しばらく使用していないアプリを無効にします</string>
@@ -101,8 +101,8 @@
     <string name="settings_section_other">その他</string>
     <string name="flashlight_always_off_title">フラッシュライトを常にオフにする</string>
     <string name="flashlight_always_off_desc">画面がオンのときも</string>
-    <string name="flashlight_pocket_title">Pocket detection</string>
-    <string name="flashlight_pocket_desc">Turn off flashlight when phone is in your pocket</string>
+    <string name="flashlight_pocket_title">ポケット検出</string>
+    <string name="flashlight_pocket_desc">デバイスがポケットに入るとフラッシュライトをオフにする</string>
     <string name="content_desc_settings">設定</string>
     <!-- Caffeinate / Permissions -->
     <string name="permission_show_notification_title">通知を表示</string>
@@ -184,7 +184,7 @@
     <string name="flashlight_pulse_facedown_title">下を向いているときのみ</string>
     <string name="flashlight_pulse_same_as_lighting_title">通知ライトと同じアプリ</string>
     <string name="flashlight_pulse_max_brightness">最大の明るさ</string>
-    <string name="flashlight_pulse_disable_on_dnd_title">Do not trigger on DND</string>
+    <string name="flashlight_pulse_disable_on_dnd_title">マナーモード時に作動しない</string>
     <string name="flashlight_pulse_preview">点滅をプレビュー</string>
     <string name="settings_section_style">スタイル</string>
     <string name="notification_lighting_stroke_adjustment_section">ストローク調整</string>
@@ -205,8 +205,8 @@
     <string name="notification_lighting_sweep_pos_left">左</string>
     <string name="notification_lighting_sweep_pos_center">中央</string>
     <string name="notification_lighting_sweep_pos_right">右</string>
-    <string name="notification_lighting_sweep_select_shapes_title">Select Shapes</string>
-    <string name="notification_lighting_sweep_select_shapes_desc">Choose which shapes are used in the sweep animation</string>
+    <string name="notification_lighting_sweep_select_shapes_title">形を選択</string>
+    <string name="notification_lighting_sweep_select_shapes_desc">スイープアニメーションで使用する形状を選択してください</string>
     <string name="settings_section_animation">アニメーション</string>
     <string name="notification_lighting_pulse_count_title">点滅回数</string>
     <string name="notification_lighting_pulse_duration_title">点滅間隔</string>
@@ -395,15 +395,22 @@
     <string name="search_no_results">「%1$s」の検索結果がありませんでした</string>
     <string name="search_results_title">検索結果</string>
     <string name="requires_following_permissions">%1$sを使用するには以下の権限が必要です</string>
+    <string name="setting_enable_unsupported_features_title">非対応の機能を有効化</string>
+    <string name="setting_enable_unsupported_features_desc">デフォルトでは非表示になっている、OEM固有の機能や冗長な機能を表示します。</string>
+    <string name="unsupported_features_warning_title">非対応の機能を有効化しますか？</string>
+    <string name="unsupported_features_warning_desc">これらの機能は、すべてのデバイスで動作するとは限らず、追加の権限やルート権限が必要になる場合があります。</string>
+    <string name="unsupported_features_confirm">有効化する</string>
+    <string name="unsupported_features_cancel">キャンセル</string>
+    <string name="disabled_on_this_device">Disabled on this device</string>
     <!-- Features -->
     <string name="feat_screen_off_widget_title">画面オフウィジェット</string>
     <string name="feat_screen_off_widget_desc">画面をオフにする見えないウィジェット</string>
-    <string name="screen_off_method_title">Screen Off Method</string>
-    <string name="screen_off_method_accessibility">Accessibility</string>
-    <string name="screen_off_method_input">Input</string>
+    <string name="screen_off_method_title">画面オフの方法</string>
+    <string name="screen_off_method_accessibility">アクセシビリティ</string>
+    <string name="screen_off_method_input">入力</string>
     <string name="screen_off_widget_input_permission_id">Screen off widget - Input</string>
-    <string name="require_double_tap_title">Require double tap</string>
-    <string name="require_double_tap_desc">To screen off</string>
+    <string name="require_double_tap_title">ダブルタップを要求する</string>
+    <string name="require_double_tap_desc">画面をオフにするために</string>
     <string name="feat_statusbar_icons_title">ステータスバーアイコン</string>
     <string name="feat_statusbar_icons_desc">ステータスバーのアイコンを表示するか設定</string>
     <string name="feat_caffeinate_title">カフェイン</string>
@@ -427,16 +434,16 @@
     <string name="diy_create_trigger_desc">トリガーされるアクションをスケジュールする</string>
     <string name="diy_create_state_title">ステータスオートメーション</string>
     <string name="diy_create_state_desc">条件の状態に基づいて実行するアクションをスケジュールする</string>
-    <string name="diy_create_action_shortcut_title">Action Shortcut</string>
-    <string name="diy_create_action_shortcut_desc">Launch shortcut to trigger action</string>
-    <string name="diy_create_pixel_searchbar_title">Pixel searchbar</string>
-    <string name="diy_create_pixel_searchbar_desc">Tap action for Pixel searchbar replacement</string>
+    <string name="diy_create_action_shortcut_title">アクションショートカット</string>
+    <string name="diy_create_action_shortcut_desc">ショートカットを起動してアクションを実行する</string>
+    <string name="diy_create_pixel_searchbar_title">Pixel 検索バー</string>
+    <string name="diy_create_pixel_searchbar_desc">Pixelの検索バーをタップ操作に置き換える</string>
     <string name="diy_editor_new_title">新規作成</string>
     <string name="diy_editor_edit_title">オートメーションの編集</string>
     <string name="feat_link_actions_title">リンクアクション</string>
     <string name="feat_link_actions_desc">リンクの処理を複数のアプリで行う</string>
-    <string name="feat_flashlight_title">Flashlight</string>
-    <string name="feat_flashlight_desc">Improve flashlight behavior</string>
+    <string name="feat_flashlight_title">フラッシュライト</string>
+    <string name="feat_flashlight_desc">懐中電灯の動作を改善する</string>
     <string name="label_restore_mode">Restore mode</string>
     <string name="feat_snooze_notifications_title">システム通知をスヌーズ</string>
     <string name="feat_snooze_notifications_desc">持続的な通知をスヌーズする</string>
@@ -461,16 +468,16 @@
     <string name="feat_freeze_desc">あまり使わないアプリを無効にする</string>
     <string name="feat_watermark_title">ウォーターマーク</string>
     <string name="feat_watermark_desc">写真にEXIFデータとロゴを追加する</string>
-    <string name="feat_daily_wallpaper_title">Wallpaper</string>
-    <string name="feat_daily_wallpaper_desc">Daily curated and live wallpaper</string>
-    <string name="label_wallpaper_apply">Apply Wallpaper</string>
+    <string name="feat_daily_wallpaper_title">壁紙</string>
+    <string name="feat_daily_wallpaper_desc">Daily curated handpicked wallpaper</string>
+    <string name="label_wallpaper_apply">壁紙を適用</string>
     <string name="label_wallpaper_by">Photo by</string>
-    <string name="label_wallpaper_applied">Wallpaper applied successfully</string>
-    <string name="label_wallpaper_apply_failed">Failed to apply wallpaper</string>
-    <string name="label_wallpaper_applying">Applying new wallpaper</string>
-    <string name="label_wallpaper_auto_update">Auto-update</string>
+    <string name="label_wallpaper_applied">壁紙が適用されました</string>
+    <string name="label_wallpaper_apply_failed">壁紙の適用に失敗しました</string>
+    <string name="label_wallpaper_applying">新しい壁紙を適用しています</string>
+    <string name="label_wallpaper_auto_update">自動更新</string>
     <string name="label_wallpaper_auto_update_desc">Checks twice a day for a new wallpaper on a background schedule</string>
-    <string name="label_clear_custom_videos">Clear custom videos</string>
+    <string name="label_clear_custom_videos">動画を削除</string>
     <string name="feat_always_on_display_title">常時表示ディスプレイ</string>
     <string name="feat_always_on_display_desc">画面オフ時に時刻と情報を表示</string>
     <string name="feat_calendar_sync_title">カレンダー同期</string>
@@ -591,8 +598,8 @@
     <string name="search_remap_haptic_desc">再設定されたボタンを押したときの感触フィードバック</string>
     <string name="search_remap_flashlight_title">フラッシュライト</string>
     <string name="search_remap_flashlight_desc">フラッシュライトを音量ボタンで切り替える</string>
-    <string name="search_flashlight_pocket_title">Flashlight pocket detection</string>
-    <string name="search_flashlight_pocket_desc">Auto-turn off flashlight when placed in pocket</string>
+    <string name="search_flashlight_pocket_title">フラッシュライト ポケット検出</string>
+    <string name="search_flashlight_pocket_desc">ポケットに入れたときにフラッシュライトを自動でオフにする</string>
     <string name="search_night_light_enable_title">ダイナミックナイトモードを有効にする</string>
     <string name="search_night_light_enable_desc">ダイナミックナイトモードを使うか切り替える</string>
     <string name="search_app_lock_enable_title">アプリロックを有効にする</string>
@@ -643,8 +650,8 @@
     <string name="perm_action_enable">設定で有効にする</string>
     <string name="perm_action_how_to">付与の方法</string>
     <string name="perm_action_granted">付与済み</string>
-    <string name="perm_action_grant_shizuku">Grant using Shizuku</string>
-    <string name="perm_write_secure_instructions">This permission can be granted either via a PC using ADB. Copy the ADB command and run on the shell.\n\nOr you can easily grant it using Shizuku from the below button.\n\nThis permission only needs to be granted once.</string>
+    <string name="perm_action_grant_shizuku">Shizukuを使って付与</string>
+    <string name="perm_write_secure_instructions">この権限は、PCからADBを使用して付与することができます。ADBコマンドをコピーして、シェルで実行してください。\n\nまたは、下のボタンから「Shizuku」を使って簡単に付与することもできます。\n\nこの権限の付与は一回だけで済みます。</string>
     <string name="perm_battery_optimization_title">バッテリーの最適化を無視</string>
     <string name="perm_battery_optimization_desc">バッテリー節約のためにシステムがアプリを強制終了しないようにしてください。</string>
     <!-- Tabs -->
@@ -772,7 +779,7 @@
     <string name="location_reached_name_label">名前</string>
     <string name="location_reached_save_btn">保存</string>
     <string name="location_reached_cancel_btn">キャンセル</string>
-    <string name="location_reached_resolving">Resolving location…</string>
+    <string name="location_reached_resolving">位置情報を特定中…</string>
     <string name="location_reached_last_trip">最後の旅行</string>
     <string name="location_reached_saved_destinations">保存済みの目的地</string>
     <string name="location_reached_no_saved_dest">目的地が保存されていません。</string>
@@ -781,7 +788,7 @@
     <string name="location_reached_restart_btn">リスタート</string>
     <string name="location_reached_instructional_desc">Google マップの座標（指定した地点）を Essentials に共有し、目的地として保存します。\n\n表示される距離は、目的地までの直線距離であり、道のりではありません。\n\n所要時間や距離の計算結果は必ずしも正確ではないため、あくまで目安としてご利用ください。</string>
     <string name="tile_location_reached">まだ着かないの？</string>
-    <string name="location_reached_pause">Pause</string>
+    <string name="location_reached_pause">一時停止</string>
     <string name="location_reached_resume">Resume</string>
     <string name="location_reached_radius_label">半径：%1$dm</string>
     <string name="location_reached_distance_label">Distance to target: %1$s</string>
@@ -839,16 +846,16 @@
     <string name="diy_action_low_power_on">バッテリーセーバーオン</string>
     <string name="diy_action_low_power_off">バッテリーセーバーオフ</string>
     <string name="diy_action_dim_wallpaper">暗い壁紙</string>
-    <string name="diy_action_screen_off">Screen Off</string>
-    <string name="diy_action_media_play_pause">Media Play/Pause</string>
-    <string name="diy_action_media_next">Media Next</string>
-    <string name="diy_action_media_previous">Media Previous</string>
-    <string name="diy_action_ai_assistant">AI Assistant</string>
-    <string name="diy_action_take_screenshot">Take Screenshot</string>
-    <string name="diy_action_toggle_media_volume">Toggle Media Volume</string>
-    <string name="diy_action_like_current_song">Like Current Song</string>
-    <string name="diy_action_circle_to_search">Circle to Search</string>
-    <string name="diy_action_pin_app">Pin Foreground App</string>
+    <string name="diy_action_screen_off">画面オフ</string>
+    <string name="diy_action_media_play_pause">メディア 再生/一時停止</string>
+    <string name="diy_action_media_next">メディア 次へ</string>
+    <string name="diy_action_media_previous">メディア 前へ</string>
+    <string name="diy_action_ai_assistant">アシスタント</string>
+    <string name="diy_action_take_screenshot">スクリーンショット</string>
+    <string name="diy_action_toggle_media_volume">メディア音量のオンオフ</string>
+    <string name="diy_action_like_current_song">再生中の曲をいいね</string>
+    <string name="diy_action_circle_to_search">かこって検索</string>
+    <string name="diy_action_pin_app">フォアグラウンドのアプリを固定</string>
     <string name="diy_dim_wallpaper_desc">このアクションでは、壁紙を暗くするために、ShizukuまたはRootが必要です。</string>
     <string name="diy_select_trigger">トリガーを選択</string>
     <string name="diy_create_app_title">アプリ</string>
@@ -903,9 +910,9 @@
     <string name="label_shizuku_ritaka">Shizuku (Rikka)</string>
     <string name="label_shizuku_tuozi">Shizuku (TuoZi)</string>
     <string name="label_search_content_description">検索</string>
-    <string name="label_recent_searches">Recent Searches</string>
-    <string name="label_no_recent_searches">No recent searches</string>
-    <string name="label_clear_all">Clear all</string>
+    <string name="label_recent_searches">検索履歴</string>
+    <string name="label_no_recent_searches">検索履歴はありません</string>
+    <string name="label_clear_all">すべてクリア</string>
     <string name="perm_device_admin_explanation">ロック画面で不正なネットワーク変更が試みられた場合、デバイスをハードロックする必要があります。</string>
     <string name="biometric_subtitle_access_settings">設定にアクセスするための認証</string>
     <string name="biometric_title_settings_format">%1$s設定</string>
@@ -949,11 +956,11 @@
         <item>通知</item>
     </string-array>
     <string-array name="keywords_pocket_detection">
-        <item>pocket</item>
-        <item>proximity</item>
-        <item>sensor</item>
-        <item>torch</item>
-        <item>auto</item>
+        <item>ポケット</item>
+        <item>近接</item>
+        <item>センサー</item>
+        <item>トーチ</item>
+        <item>自動</item>
     </string-array>
     <string-array name="keywords_qs_stay_awake">
         <item>起動</item>
@@ -1079,7 +1086,7 @@
     <string-array name="keywords_battery">
         <item>バッテリー</item>
         <item>充電</item>
-        <item>optimization</item>
+        <item>最適化</item>
         <item>ピクセル</item>
     </string-array>
     <!-- App Selection Extra -->
@@ -1294,14 +1301,14 @@
     <string name="watch_help_title">ウォッチにインストール</string>
     <string name="watch_help_description">ウォッチの機能を利用するには、Wear OSウォッチにEssentialsコンパニオンアプリをインストールする必要があります。下のボタンをクリックすると、ウォッチでPlayストアが直接開きます。</string>
     <string name="watch_help_open_play_store">Open on Watch</string>
-    <string name="feat_watch_controls_title">Customize</string>
-    <string name="feat_watch_controls_desc">Customize WearOS app controls</string>
-    <string name="watch_controls_long_press_hint">Long press to enable or disable buttons</string>
-    <string name="watch_controls_reorder_title">Reorder watch controls</string>
-    <string name="feat_watch_wireless_debugging_title">Wireless Debugging</string>
-    <string name="feat_watch_wireless_debugging_desc">Enable remotely</string>
-    <string name="feat_sync_sound_mode_title">Sync sound mode</string>
-    <string name="feat_sync_sound_mode_desc">Automatically sync with watch</string>
+    <string name="feat_watch_controls_title">カスタマイズ</string>
+    <string name="feat_watch_controls_desc">WearOSアプリのコントロールをカスタマイズする</string>
+    <string name="watch_controls_long_press_hint">長押しでボタンの有効と無効を切り替える</string>
+    <string name="watch_controls_reorder_title">ウォッチコントロールを並べ替え</string>
+    <string name="feat_watch_wireless_debugging_title">ワイヤレスデバッグ</string>
+    <string name="feat_watch_wireless_debugging_desc">遠隔で有効にする</string>
+    <string name="feat_sync_sound_mode_title">サイレントモードの同期</string>
+    <string name="feat_sync_sound_mode_desc">ウォッチと自動で同期します</string>
     <string name="perm_watch_write_secure_title">Watch Secure Settings</string>
     <string name="perm_watch_write_secure_desc">Requires secure settings write permission on your Watch. Grant it using the ADB command below.</string>
     <string name="cat_interaction">Interaction</string>
@@ -1412,8 +1419,8 @@
     <string name="label_use_blur">ぼかしを使う</string>
     <string name="desc_use_blur">UI全体でブラー要素を有効にする</string>
     <string name="msg_blur_compatibility_error">このデバイスでは、Android 15 以下の Samsung デバイスで発生する既知の表示不具合を防ぐため、ぼかし機能が無効化されています。</string>
-    <string name="setting_swipe_tabs_title">Swipe between tabs</string>
-    <string name="setting_swipe_tabs_desc">In home screen</string>
+    <string name="setting_swipe_tabs_title">タブ間をスワイプで移動</string>
+    <string name="setting_swipe_tabs_desc">ホーム画面で</string>
     <!-- Empty State Actions -->
     <string name="msg_no_apps_frozen">フリーズするアプリが選択されていません。</string>
     <string name="action_get_started">はじめる</string>
@@ -1483,21 +1490,21 @@
     <string name="feat_lock_screen_clock_title">ロック画面時計</string>
     <string name="feat_lock_screen_clock_desc">Pixelでロック画面の時計をカスタマイズする</string>
     <string name="about_desc_lock_screen_clock">Pixelでロック画面の時計のスタイルを変更します。システムUIが提供する利用可能な時計の文字盤から選択してください。一部の古いスタイルは利用できない場合があります。</string>
-    <string name="lock_screen_clock_bignum">Big Number</string>
-    <string name="lock_screen_clock_calligraphy">Calligraphy</string>
+    <string name="lock_screen_clock_bignum">大きい数字</string>
+    <string name="lock_screen_clock_calligraphy">カリグラフィー</string>
     <string name="lock_screen_clock_flex">フレックス</string>
-    <string name="lock_screen_clock_growth">Growth</string>
-    <string name="lock_screen_clock_handwritten">Handwritten</string>
-    <string name="lock_screen_clock_inflate">Inflate</string>
-    <string name="lock_screen_clock_metro">Metro</string>
-    <string name="lock_screen_clock_numoverlap">Number Overlap</string>
-    <string name="lock_screen_clock_weather">Weather</string>
+    <string name="lock_screen_clock_growth">グロー</string>
+    <string name="lock_screen_clock_handwritten">手書き</string>
+    <string name="lock_screen_clock_inflate">膨らみ</string>
+    <string name="lock_screen_clock_metro">メトロ</string>
+    <string name="lock_screen_clock_numoverlap">オーバーラップ</string>
+    <string name="lock_screen_clock_weather">天気</string>
     <string name="lock_screen_clock_select_label">時計スタイルを選択</string>
     <string name="lock_screen_clock_current_label">Current</string>
     <string name="lock_screen_clock_apply_label">Apply</string>
     <string name="lock_screen_clock_applied_toast">Clock style applied</string>
     <string name="lock_screen_clock_permission_required">WRITE_SECURE_SETTINGS permission required</string>
-    <string name="lock_screen_clock_default">Default</string>
+    <string name="lock_screen_clock_default">デフォルト</string>
     <string name="label_weight">高さ</string>
     <string name="label_width">幅</string>
     <string name="label_grade">Grade</string>
@@ -1521,50 +1528,50 @@
     <string name="whats_new_specs_desc">GSMArenaによって提供された不正確な仕様を削除することで、デバイスに関する分析結果をより正確で高速かつ完全に信頼できるものにしました。</string>
     <string name="whats_new_apps_title">アプリのアップデートが移行されました</string>
     <string name="whats_new_apps_desc">アプリタブが「Android端末情報」機能に完全に統合され、すべてのアプリのアップデートを一つのまとまった場所で簡単に管理できるようになりました。</string>
-    <string name="favorites_widget_name">Favorite Features</string>
-    <string name="favorites_widget_description">View and launch your favorite features at a glance.</string>
-    <string name="favorites_widget_empty_state">No favorite features pinned yet. Open the app to pin some!</string>
+    <string name="favorites_widget_name">お気に入り機能</string>
+    <string name="favorites_widget_description">お気に入りの機能をひと目で確認し、起動できます。</string>
+    <string name="favorites_widget_empty_state">お気に入り機能がピン留めされていません。アプリを開いてピン留めしましょう！</string>
     <!-- External Control Permission -->
     <string name="perm_external_control_label">control Essentials features</string>
     <string name="perm_external_control_desc">read, update and control Essentials features and settings</string>
-    <string name="pixel_searchbar_settings_title">Pixel Searchbar Customization</string>
+    <string name="pixel_searchbar_settings_title">Pixel 検索バーカスタマイズ</string>
     <string name="pixel_searchbar_style_empty">Empty (Default)</string>
-    <string name="pixel_searchbar_style_date">Date</string>
-    <string name="pixel_searchbar_background_pill_title">Background pill</string>
-    <string name="pixel_searchbar_background_pill_desc">Show the date inside a container</string>
-    <string name="about_desc_pixel_searchbar">Replace the default Pixel Launcher search bar on your home screen. You can customize the content to show either nothing (Empty) or the current date. \n\nPlease note that enabling this may break Pixel Launcher At a Glance widgets (such as sports and finance widgets). \n\nAnd the setting may need to be applied multiple times to take effect.</string>
-    <string name="label_replace_with">Replace with</string>
+    <string name="pixel_searchbar_style_date">日付</string>
+    <string name="pixel_searchbar_background_pill_title">背景ピル</string>
+    <string name="pixel_searchbar_background_pill_desc">枠の中に日付を表示する</string>
+    <string name="about_desc_pixel_searchbar">ホーム画面にあるデフォルトのPixel Launcher検索バーを置き換えます。表示内容は、何も表示しない（空白）か、現在の日付を表示するかのいずれかにカスタマイズ可能です。\n\nなお、この機能を有効にすると、Pixel LauncherのAt a Glanceウィジェット（スポーツや金融情報のウィジェットなど）が正常に動作しなくなる可能性があります。\n\nまた、設定を反映させるために、複数回適用する必要がある場合があります。</string>
+    <string name="label_replace_with">置き換え先</string>
     <string name="pixel_searchbar_tap_action_title">Configure tap action</string>
     <string name="pixel_searchbar_tap_action_desc">Set up actions to trigger in DIY automations when tapped</string>
-    <string name="pixel_searchbar_style_widget">Widget</string>
-    <string name="pixel_searchbar_widget_picker_title">Pick a widget</string>
+    <string name="pixel_searchbar_style_widget">ウィジェット</string>
+    <string name="pixel_searchbar_widget_picker_title">ウィジェットを選択</string>
     <string name="pixel_searchbar_widget_picker_desc">Select a widget to display its content in the searchbar</string>
     <string name="pixel_searchbar_widget_selected">Widget selected</string>
-    <string name="pixel_searchbar_widget_none">No widget selected</string>
-    <string name="pixel_searchbar_widget_change">Change widget</string>
-    <string name="pixel_searchbar_widget_remove">Remove widget</string>
+    <string name="pixel_searchbar_widget_none">ウィジェットが選択されていません</string>
+    <string name="pixel_searchbar_widget_change">ウィジェットを変更</string>
+    <string name="pixel_searchbar_widget_remove">ウィジェットを削除</string>
     <string name="pixel_searchbar_bind_permission_title">Widget host permission required</string>
     <string name="pixel_searchbar_bind_permission_desc">Essentials needs permission to host widgets. Tap to grant.</string>
     <string name="pixel_searchbar_scraped_line1">Scraped title</string>
     <string name="pixel_searchbar_scraped_line2">Scraped subtitle</string>
-    <string name="pixel_searchbar_widget_padding_h">Horizontal padding</string>
-    <string name="pixel_searchbar_widget_padding_v">Vertical padding</string>
-    <string name="pixel_searchbar_tap_action_enabled">Custom tap action</string>
-    <string name="pixel_searchbar_tap_action_enabled_desc">Use DIY tap action instead of widget\'s own</string>
-    <string name="pixel_searchbar_style_music">Music</string>
-    <string name="action_restart_shizuku">Restart Shizuku</string>
+    <string name="pixel_searchbar_widget_padding_h">水平方向のパディング</string>
+    <string name="pixel_searchbar_widget_padding_v">垂直方向のパディング</string>
+    <string name="pixel_searchbar_tap_action_enabled">カスタムタップアクション</string>
+    <string name="pixel_searchbar_tap_action_enabled_desc">ウィジェット独自のタップアクションではなく、DIYのタップアクションを使用する</string>
+    <string name="pixel_searchbar_style_music">音楽</string>
+    <string name="action_restart_shizuku">Shizukuを再起動</string>
     <string name="toast_enter_shizuku_token">Please enter Shizuku auth token in settings first</string>
     <!-- Pocket Mode -->
-    <string name="feat_pocket_mode_title">Pocket mode</string>
-    <string name="feat_pocket_mode_desc">Prevent accidental touches while in pocket</string>
-    <string name="pocket_mode_use_light_title">Use light sensor</string>
-    <string name="pocket_mode_use_light_desc">Use ambient light level in addition to proximity for better accuracy</string>
+    <string name="feat_pocket_mode_title">ポケットモード</string>
+    <string name="feat_pocket_mode_desc">ポケットに入れている間の誤動作を防ぐ</string>
+    <string name="pocket_mode_use_light_title">照度センサーを使う</string>
+    <string name="pocket_mode_use_light_desc">精度を高めるために、近接度に加えて照度も使う</string>
     <string name="pocket_mode_active">Pocket mode active</string>
     <string name="pocket_mode_dismiss_hint">Press any volume key to dismiss</string>
-    <string name="pocket_mode_warning">Warning: On some devices with missing sensors, enabling Pocket Mode may break deep sleep and cause higher battery drain</string>
-    <string name="pocket_mode_exclude_apps_title">Exclude apps</string>
-    <string name="pocket_mode_exclude_apps_desc">Choose apps where Pocket Mode should not trigger. Pocket mode will not work when streaming or gaming by default</string>
-    <string name="pocket_mode_trigger_delay_title">Trigger delay</string>
-    <string name="pocket_mode_lock_screen_only_title">Lock screen only</string>
-    <string name="pocket_mode_lock_screen_only_desc">Only trigger pocket mode when the device is locked</string>
+    <string name="pocket_mode_warning">警告：一部のセンサーを搭載していないデバイスでは、「ポケットモード」を有効にするとディープスリープが阻害され、バッテリーの消費が早まる可能性があります</string>
+    <string name="pocket_mode_exclude_apps_title">除外アプリ</string>
+    <string name="pocket_mode_exclude_apps_desc">ポケットモードが動作しないようにするアプリを選択してください。デフォルトでは、ストリーミングやゲーム中は起動しないようになっています</string>
+    <string name="pocket_mode_trigger_delay_title">トリガー遅延</string>
+    <string name="pocket_mode_lock_screen_only_title">ロック画面のみ</string>
+    <string name="pocket_mode_lock_screen_only_desc">デバイスがロックされているときのみポケットモードをオンにする</string>
 </resources>

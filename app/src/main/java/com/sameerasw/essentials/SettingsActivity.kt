@@ -39,6 +39,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.IconButton
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -481,6 +486,7 @@ fun SettingsContent(
             ) {
                 val view = LocalView.current
                 var tokenText by remember { mutableStateOf(viewModel.shizukuAuthToken.value) }
+                var isTokenVisible by remember { mutableStateOf(false) }
 
                 OutlinedTextField(
                     value = tokenText,
@@ -488,7 +494,20 @@ fun SettingsContent(
                     label = { Text("Shizuku auth token") },
                     modifier = Modifier.weight(1f),
                     shape = MaterialTheme.shapes.large,
-                    singleLine = true
+                    singleLine = true,
+                    visualTransformation = if (isTokenVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    trailingIcon = {
+                        IconButton(onClick = { isTokenVisible = !isTokenVisible }) {
+                            Icon(
+                                painter = painterResource(
+                                    id = if (isTokenVisible) R.drawable.rounded_visibility_24 else R.drawable.rounded_visibility_off_24
+                                ),
+                                contentDescription = if (isTokenVisible) "Hide token" else "Show token",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
                 )
 
                 Button(
