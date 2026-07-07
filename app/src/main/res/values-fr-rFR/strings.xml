@@ -103,6 +103,8 @@
     <string name="flashlight_always_off_desc">Même quand l\'écran est allumé</string>
     <string name="flashlight_pocket_title">Pocket detection</string>
     <string name="flashlight_pocket_desc">Turn off flashlight when phone is in your pocket</string>
+    <string name="flashlight_overheat_title">Overheating prevention</string>
+    <string name="flashlight_overheat_desc">Lower brightness on longer period of use</string>
     <string name="content_desc_settings">Paramètres</string>
     <!-- Caffeinate / Permissions -->
     <string name="permission_show_notification_title">Afficher des notifications</string>
@@ -651,6 +653,7 @@
     <string name="perm_action_how_to">Comment accorder</string>
     <string name="perm_action_granted">Accordée</string>
     <string name="perm_action_grant_shizuku">Grant using Shizuku</string>
+    <string name="perm_action_grant_root">Grant using Root</string>
     <string name="perm_write_secure_instructions">This permission can be granted either via a PC using ADB. Copy the ADB command and run on the shell.\n\nOr you can easily grant it using Shizuku from the below button.\n\nThis permission only needs to be granted once.</string>
     <string name="perm_battery_optimization_title">Optimisation de la batterie</string>
     <string name="perm_battery_optimization_desc">Assure que le service ne soit pas fermé par le système pour économise de l\'énergie.</string>
@@ -1400,6 +1403,7 @@
     <string name="refresh_rate_system_default">Système</string>
     <string name="refresh_rate_reset_desc">Supprimez la modification personnalisée et rétablissez le comportement d\'actualisation par défaut du système</string>
     <string name="msg_refresh_rate_permission_required">La permission Shizuku est requise pour régler la fréquence de rafraîchissement</string>
+    <string name="msg_refresh_rate_root_permission_required">Root permission required to adjust refresh rate</string>
     <string name="search_refresh_rate_mode_title">Mode de fréquence de rafraîchissement fixe</string>
     <string name="search_refresh_rate_mode_desc">Basculez entre le contrôle du taux de rafraîchissement fixe et le contrôle du taux de rafraîchissement variable</string>
     <string name="search_refresh_rate_fixed_title">Fréquence de rafraîchissement fixe</string>
